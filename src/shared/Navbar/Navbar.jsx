@@ -3,8 +3,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AlignRight, Phone } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import logoDark from "@/assets/logo.webp";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+// استبدال مكوّن التحميل الكسول بصورة عادية لتقليل JS ووقت الحجب
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -75,13 +74,16 @@ const Navbar = () => {
                   className="flex  items-center ms-auto justify-center navbar-brand logoimg"
                   to="/"
                 >
-                  <LazyLoadImage
+                  <img
                     src={logoDark}
+                    srcSet={`${logoDark} 100w`}
+                    sizes="(max-width: 768px) 80px, 100px"
                     alt="logo"
                     width={100}
                     height={100}
+                    loading="eager"
+                    decoding="async"
                     className="transition-all  duration-300 "
-                    effect="blur"
                   />
                 </Link>
               </div>

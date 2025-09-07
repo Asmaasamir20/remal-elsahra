@@ -3,23 +3,26 @@ import homeCover from "@/assets/home/homeCover.webp";
 
 const HomeCover = memo(() => {
   return (
-    <section className="home-cover flex items-center justify-center p-6">
-      {/* Preload LCP background image without affecting layout */}
+    <section className="home-cover relative flex items-center justify-center p-6 overflow-hidden">
+      {/* LCP: صورة الغلاف كعنصر img قابل للاكتشاف مع أولوية عالية */}
       <img
         src={homeCover}
         alt=""
         fetchPriority="high"
         decoding="async"
         aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* طبقة تدرّج مطابقة للتصميم السابق */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
         style={{
-          position: "absolute",
-          width: 1,
-          height: 1,
-          opacity: 0,
-          pointerEvents: "none",
+          background:
+            "linear-gradient(135deg, rgba(38, 49, 64, 0.7), rgba(0, 0, 0, 0.8))",
         }}
       />
-      <div className="container min-w-7xl md:px-10 mx-auto py-10">
+      <div className="relative container min-w-7xl md:px-10 mx-auto py-10">
         <div className="lg:py-6 lg:px-14 text-center">
           <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-gray-200 py-6">
             مُخْتَبَر

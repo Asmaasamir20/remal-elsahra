@@ -27,9 +27,9 @@ const Footer = () => {
               <h5 className="text-md sm:text-xl md:text-2xl lg:text-3xl font-bold  text-gray-800 mb-2 leading-tight py-4 shadow-lg ">
                 اِتَّصِلْ بِنَا عَلَى
               </h5>
-              <p className="my-5">
+              <div className="my-5">
                 <CallMe color="text-sky-800 " hoverColor="hover:text-sky-700" />
-              </p>
+              </div>
             </div>
           </div>
 
@@ -40,7 +40,6 @@ const Footer = () => {
                 alt="logo"
                 className="mx-auto object-contain"
                 effect="blur"
-               
               />
             </Link>
           </div>
@@ -55,8 +54,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-    
     </footer>
   );
 };

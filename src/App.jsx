@@ -13,54 +13,61 @@ const WhatsAppLazy = lazy(() => import("./shared/WhatsApp"));
 function App() {
   // تفعيل Google Tag Manager
   useEffect(() => {
-    const tagManagerArgs = {
-      gtmId: "GTM-W9MZMH9B",
-    };
-    TagManager.initialize(tagManagerArgs);
+    if (import.meta.env.PROD) {
+      const tagManagerArgs = {
+        gtmId: "GTM-W9MZMH9B",
+      };
+      TagManager.initialize(tagManagerArgs);
+    }
   }, []);
 
   // تفعيل Google Analytics
   useEffect(() => {
-    ReactGA.initialize("G-RW5JNT36KP");
-    ReactGA.send("pageview");
+    if (import.meta.env.PROD) {
+      ReactGA.initialize("G-RW5JNT36KP");
+      ReactGA.send("pageview");
 
-    const handleLocationChange = () => {
-      ReactGA.send({
-        hitType: "pageview",
-        page: window.location.pathname + window.location.search,
-      });
-    };
+      const handleLocationChange = () => {
+        ReactGA.send({
+          hitType: "pageview",
+          page: window.location.pathname + window.location.search,
+        });
+      };
 
-    window.addEventListener("popstate", handleLocationChange);
-    return () => {
-      window.removeEventListener("popstate", handleLocationChange);
-    };
+      window.addEventListener("popstate", handleLocationChange);
+      return () => {
+        window.removeEventListener("popstate", handleLocationChange);
+      };
+    }
   }, []);
 
   // تفعيل Google Ads Conversion Tracking
   useEffect(() => {
-    // التأكد من عدم تحميل gtag.js أكثر من مرة
-    if (!window.gtag) {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=AW-16877002370";
-      document.head.appendChild(script);
+    if (import.meta.env.PROD) {
+      // التأكد من عدم تحميل gtag.js أكثر من مرة
+      if (!window.gtag) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=AW-16877002370";
+        document.head.appendChild(script);
 
-      script.onload = () => {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        window.gtag = gtag;
+        script.onload = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
 
-        gtag("js", new Date());
-        gtag("config", "AW-16877002370"); // معرف Google Ads
+          gtag("js", new Date());
+          gtag("config", "AW-16877002370"); // معرف Google Ads
 
-        // إرسال حدث التحويل عند تحميل الصفحة
-        gtag("event", "conversion", {
-          send_to: "AW-16877002370/wHFBCPeps58aEIK9yu8-", // معرف التحويل الصحيح
-        });
-      };
+          // إرسال حدث التحويل عند تحميل الصفحة
+          gtag("event", "conversion", {
+            send_to: "AW-16877002370/wHFBCPeps58aEIK9yu8-", // معرف التحويل الصحيح
+          });
+        };
+      }
     }
   }, []);
 
@@ -87,12 +94,22 @@ function App() {
             <p className="loading-text">جاري التحميل... يرجى الانتظار</p>
           </div>
         </div>
-      }>
-      <RouterProvider router={router} />
+      }
+    >
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+          v7_fetcherPersist: true,
+          v7_normalizeFormMethod: true,
+          v7_partialHydration: true,
+          v7_skipActionErrorRevalidation: true,
+        }}
+      />
       <WhatsAppLazy />
     </Suspense>
   );
 }
 
 export default App;
-

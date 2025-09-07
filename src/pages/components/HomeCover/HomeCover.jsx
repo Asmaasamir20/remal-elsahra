@@ -15,7 +15,8 @@ const HomeCover = memo(() => {
         link.rel = "preload";
         link.as = "image";
         link.href = homeCover;
-        link.setAttribute("imagesrcset", homeCover);
+        // Ensure the browser understands responsive candidates for the preloaded image
+        link.setAttribute("imagesrcset", homeCoverSrcSet);
         link.setAttribute("imagesizes", "100vw");
         document.head.appendChild(link);
       }
@@ -29,6 +30,7 @@ const HomeCover = memo(() => {
         srcSet={homeCoverSrcSet}
         alt=""
         loading="eager"
+        fetchpriority="high"
         decoding="async"
         aria-hidden="true"
         width={1920}

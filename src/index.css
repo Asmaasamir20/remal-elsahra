@@ -71,12 +71,7 @@ body {
 /* تمت إزالة background-attachment: fixed لتقليل تكلفة الطلاء وإعادة التدفق */
 
 .footer {
-  background: linear-gradient(
-      135deg,
-      rgba(0, 23, 60, 0.1),
-      rgba(3, 13, 30, 0.2)
-    ),
-    url("./assets/bg.webp");
+  /* يتم حقن الخلفية عند ظهور الفوتر عبر صنف .bg-ready لتقليل تكلفة LCP */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

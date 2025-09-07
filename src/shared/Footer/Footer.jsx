@@ -1,11 +1,34 @@
 import { Link } from "react-router-dom";
 import logoimg from "@/assets/logo.webp";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import { useEffect, useRef } from "react";
 import CallMe from "./../CallMe";
 const Footer = () => {
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    // Lazy-apply heavy background only when footer is near viewport
+    const node = footerRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            node.style.background =
+              "linear-gradient(135deg, rgba(0, 23, 60, 0.1), rgba(3, 13, 30, 0.2)), url('" +
+              new URL("@/assets/bg.webp", import.meta.url).href +
+              "')";
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <footer className="footer py-6 ">
+    <footer ref={footerRef} className="footer py-6 ">
       <div className="container mx-auto px-8 md:px-18 min-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8 my-3 lg:px-4">
           <div className="text-center px-4 py-3 rounded-lg shadow-lg shadow-gray-500  transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-gray-600">
@@ -35,11 +58,12 @@ const Footer = () => {
 
           <div className="text-center px-4 py-3  rounded-lg shadow-lg shadow-gray-500  transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-gray-600">
             <Link to="/" className="image-footer">
-              <LazyLoadImage
+              <img
                 src={logoimg}
                 alt="logo"
                 className="mx-auto object-contain"
-                effect="blur"
+                loading="lazy"
+                decoding="async"
               />
             </Link>
           </div>

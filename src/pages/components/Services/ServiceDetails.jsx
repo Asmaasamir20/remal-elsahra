@@ -27,6 +27,11 @@ const ServiceDetails = () => {
 
   const navigate = useNavigate();
 
+  // دالة للانتقال إلى صفحة الخدمات (يجب أن تُستدعَى كل رندر لتجنب تحذير hooks)
+  const goToServices = useCallback(() => {
+    navigate("/services");
+  }, [navigate]);
+
   // إذا كانت الخدمة غير موجودة
   if (!service) {
     return (
@@ -40,11 +45,6 @@ const ServiceDetails = () => {
       </div>
     );
   }
-
-  // دالة للانتقال إلى صفحة الخدمات
-  const goToServices = useCallback(() => {
-    navigate("/services");
-  }, [navigate]);
 
   return (
     <div className="bg-gray-200 p-4 sm:p-6 md:p-10">
@@ -85,7 +85,8 @@ const ServiceDetails = () => {
         <div className="text-center mt-8 sm:mt-10">
           <Button
             onClick={goToServices}
-            className="px-4 sm:px-6 py-4 sm:py-6 rounded-full bg-blue-500 text-white text-lg sm:text-xl hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-lg hover:shadow-gray-500 transition-all duration-500 transform hover:scale-105">
+            className="px-4 sm:px-6 py-4 sm:py-6 rounded-full bg-blue-500 text-white text-lg sm:text-xl hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-lg hover:shadow-gray-500 transition-all duration-500 transform hover:scale-105"
+          >
             <ArrowRight className="ml-2" />
             جميع الخدمات
           </Button>

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Home } from "lucide-react";
 import { motion } from "framer-motion";
@@ -25,7 +25,8 @@ const AboutOverview = () => {
           {/* العمود الأول : النص */}
           <motion.div
             className="flex flex-col justify-center"
-            {...animationProps}>
+            {...animationProps}
+          >
             <h3 className="text-xl Amiri-font leading-8 sm:text-xl md:text-2xl lg:text-3xl px-4 bg-white rounded-s-xl rounded-e-xl text-sky-600 text-center py-6 border-r-2 border-b-2 border-sky-600 shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-500 mb-5 font-bold">
               مرحبا بكم في مختبر رمال الصحراء
             </h3>
@@ -67,7 +68,8 @@ const AboutOverview = () => {
               opacity: { duration: 0.6 },
               y: { type: "spring", stiffness: 100, damping: 25 },
             }}
-            viewport={{ once: false }}>
+            viewport={{ once: false }}
+          >
             <div className="w-full p-4 border-l-2 border-b-2 border-yellow-500 rounded-xl mx-auto h-auto shadow-xl shadow-gray-500 overflow-hidden hover:scale-105 translate duration-500">
               <Link className="w-full h-full">
                 <LazyLoadImage

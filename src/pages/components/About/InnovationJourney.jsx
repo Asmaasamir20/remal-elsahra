@@ -1,4 +1,5 @@
 import React from "react"; // تأكد من استيراد React
+import PropTypes from "prop-types";
 import {
   FaAward,
   FaTools,
@@ -21,14 +22,27 @@ const InfoCard = React.memo(
           scale: 1.05,
           boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           backgroundColor: "#f3f4f6",
-        }}>
+        }}
+      >
         <Icon className="text-4xl text-blue-600 mb-4" />
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
-        <div className="text-gray-700 leading-relaxed text-md">{description}</div>
+        <div className="text-gray-700 leading-relaxed text-md">
+          {description}
+        </div>
       </motion.div>
     );
   }
 );
+
+InfoCard.displayName = "InfoCard";
+
+InfoCard.propTypes = {
+  Icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  initial: PropTypes.object,
+  whileInView: PropTypes.object,
+};
 
 const InnovationJourney = () => {
   return (
@@ -85,8 +99,6 @@ const InnovationJourney = () => {
             whileInView={{ opacity: 1, y: 0 }}
           />
         </div>
-
-        
       </div>
     </section>
   );

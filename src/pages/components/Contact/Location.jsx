@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ContactItem = ({ icon: Icon, title, content, link }) => (
   <div className="flex items-center bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:scale-105 transition-all duration-500">
     <div className="p-2 lg:p-4 bg-cyan-500 rounded-full shadow-lg hover:bg-cyan-600 transform transition-all duration-300">
-      <Icon className="text-white w-4 h-4 sm:w-8 sm:h-8"  />
+      <Icon className="text-white w-4 h-4 sm:w-8 sm:h-8" />
     </div>
     <div className="ml-4 px-2 sm:ml-6">
       <h4 className="text-sm sm:text-lg font-semibold text-gray-700 mb-1 sm:mb-2">
@@ -24,6 +25,13 @@ const ContactItem = ({ icon: Icon, title, content, link }) => (
   </div>
 );
 
+ContactItem.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  link: PropTypes.string,
+};
+
 const Location = () => {
   return (
     <section className="py-4 bg-zinc-300">
@@ -35,7 +43,8 @@ const Location = () => {
               className="w-full h-full rounded-lg"
               src="https://maps.google.com/maps?q=%D8%B4%D8%A7%D8%B1%D8%B9%20%D8%A7%D9%84%D9%86%D8%B9%D9%85%D8%A7%D9%86%20%D8%A8%D9%86%20%D8%A8%D8%B4%D9%8A%D8%B1,%20%D8%A7%D9%84%D8%AD%D8%B2%D9%85,%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6&t=m&z=17&output=embed"
               title="شارع النعمان بن بشير، الحزم، الرياض"
-              loading="lazy"></iframe>
+              loading="lazy"
+            ></iframe>
           </div>
 
           {/* تفاصيل الاتصال */}

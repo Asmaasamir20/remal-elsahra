@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { imagesEquipment } from "../Equipment/equipmentImages";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +70,8 @@ const EquipmentsOverview = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="w-full my-8 mx-auto text-center">
+        className="w-full my-8 mx-auto text-center"
+      >
         <h2 className="text-xl Amiri-font w-1/2 mx-auto bg-gray-50 text-sky-600 text-center py-6 border-r-2 border-b-2 border-sky-600 rounded-s-xl rounded-e-xl shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:text-2xl lg:text-3xl mb-5 font-bold custom-shadow">
           صور من معداتنا
         </h2>
@@ -83,9 +84,9 @@ const EquipmentsOverview = () => {
           </div>
         </div>
         <p className="text-md sm:text-lg lg:w-2/3 mx-auto leading-8 text-md font-normal mt-4 py-2 lg:px-10 text-gray-600">
-          يتميز مختبر "رمال الصحراء" في المملكة العربية السعودية بتوفير أحدث
-          المعدات والتقنيات المتقدمة في مجال دراسات التربة والاختبارات
-          الجيوتقنية.
+          يتميز مختبر &quot;رمال الصحراء&quot; في المملكة العربية السعودية
+          بتوفير أحدث المعدات والتقنيات المتقدمة في مجال دراسات التربة
+          والاختبارات الجيوتقنية.
         </p>
       </motion.div>
 
@@ -107,7 +108,8 @@ const EquipmentsOverview = () => {
               scale: 0.95, // تصغير الصورة عند النقر
               boxShadow: "none", // إزالة الظل عند الضغط
               transition: { duration: 0.3 }, // تقليل مدة الانتقال عند النقر
-            }}>
+            }}
+          >
             <LazyLoadImage
               src={image}
               alt={`Project ${index + 1}`}
@@ -133,17 +135,20 @@ const EquipmentsOverview = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={closeModal}>
+              onClick={closeModal}
+            >
               <motion.div
                 className="relative w-[90%] md:w-[80%] lg:w-[60%] bg-white rounded-lg shadow-lg overflow-hidden"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.8 }}
                 transition={{ type: "spring", stiffness: 200 }}
-                onClick={(e) => e.stopPropagation()}>
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   onClick={closeModal}
-                  className="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 z-10">
+                  className="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 rounded-full p-2 z-10"
+                >
                   <X size={24} />
                 </button>
                 <LazyLoadImage
@@ -161,7 +166,8 @@ const EquipmentsOverview = () => {
                       e.stopPropagation();
                       prevImage();
                     }}
-                    className="bg-white text-black p-2 rounded-full hover:bg-gray-200">
+                    className="bg-white text-black p-2 rounded-full hover:bg-gray-200"
+                  >
                     <ChevronLeft size={24} />
                   </button>
                   <button
@@ -169,7 +175,8 @@ const EquipmentsOverview = () => {
                       e.stopPropagation();
                       nextImage();
                     }}
-                    className="bg-white text-black p-2 rounded-full hover:bg-gray-200">
+                    className="bg-white text-black p-2 rounded-full hover:bg-gray-200"
+                  >
                     <ChevronRight size={24} />
                   </button>
                 </div>

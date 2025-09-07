@@ -2,87 +2,128 @@ import { RouterProvider } from "react-router-dom";
 import router from "./components/Routing/Routes";
 import { Suspense, lazy, useEffect } from "react";
 import { RingLoader } from "react-spinners";
-import ReactGA from "react-ga4"; // استيراد react-ga4
-import FontFaceObserver from "fontfaceobserver";
-import TagManager from "react-gtm-module"; // استيراد react-gtm-module
 
 import "./App.css";
 
 const WhatsAppLazy = lazy(() => import("./shared/WhatsApp"));
 
 function App() {
+  // أداة لجدولة تنفيذ مهمة عند خمول المتصفح مع بديل setTimeout
+  const scheduleIdle = (task) => {
+    if ("requestIdleCallback" in window) {
+      // @ts-ignore
+      requestIdleCallback(() => task());
+    } else {
+      setTimeout(task, 1500);
+    }
+  };
+
   // تفعيل Google Tag Manager
   useEffect(() => {
     if (import.meta.env.PROD) {
-      const tagManagerArgs = {
-        gtmId: "GTM-W9MZMH9B",
+      const initGTM = () => {
+        import("react-gtm-module").then((mod) => {
+          const TagManager = mod.default || mod;
+          const tagManagerArgs = { gtmId: "GTM-W9MZMH9B" };
+          TagManager.initialize(tagManagerArgs);
+        });
       };
-      TagManager.initialize(tagManagerArgs);
+
+      if (document.readyState === "complete") {
+        scheduleIdle(initGTM);
+      } else {
+        const onLoad = () => {
+          scheduleIdle(initGTM);
+          window.removeEventListener("load", onLoad);
+        };
+        window.addEventListener("load", onLoad);
+      }
     }
   }, []);
 
   // تفعيل Google Analytics
   useEffect(() => {
     if (import.meta.env.PROD) {
-      ReactGA.initialize("G-RW5JNT36KP");
-      ReactGA.send("pageview");
+      const initGA = () => {
+        import("react-ga4").then((mod) => {
+          const ReactGA = mod.default || mod;
+          ReactGA.initialize("G-RW5JNT36KP");
+          ReactGA.send("pageview");
 
-      const handleLocationChange = () => {
-        ReactGA.send({
-          hitType: "pageview",
-          page: window.location.pathname + window.location.search,
+          const handleLocationChange = () => {
+            ReactGA.send({
+              hitType: "pageview",
+              page: window.location.pathname + window.location.search,
+            });
+          };
+
+          window.addEventListener("popstate", handleLocationChange);
+          // تنظيف
+          window.addEventListener("beforeunload", () => {
+            window.removeEventListener("popstate", handleLocationChange);
+          });
         });
       };
 
-      window.addEventListener("popstate", handleLocationChange);
-      return () => {
-        window.removeEventListener("popstate", handleLocationChange);
-      };
+      scheduleIdle(initGA);
     }
   }, []);
 
   // تفعيل Google Ads Conversion Tracking
   useEffect(() => {
     if (import.meta.env.PROD) {
-      // التأكد من عدم تحميل gtag.js أكثر من مرة
-      if (!window.gtag) {
-        const script = document.createElement("script");
-        script.async = true;
-        script.src =
-          "https://www.googletagmanager.com/gtag/js?id=AW-16877002370";
-        document.head.appendChild(script);
+      const initAds = () => {
+        // التأكد من عدم تحميل gtag.js أكثر من مرة
+        if (!window.gtag) {
+          const script = document.createElement("script");
+          script.async = true;
+          script.src =
+            "https://www.googletagmanager.com/gtag/js?id=AW-16877002370";
+          document.head.appendChild(script);
 
-        script.onload = () => {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          window.gtag = gtag;
+          script.onload = () => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
 
-          gtag("js", new Date());
-          gtag("config", "AW-16877002370"); // معرف Google Ads
+            window.gtag = gtag;
 
-          // إرسال حدث التحويل عند تحميل الصفحة
-          gtag("event", "conversion", {
-            send_to: "AW-16877002370/wHFBCPeps58aEIK9yu8-", // معرف التحويل الصحيح
-          });
-        };
-      }
+            gtag("js", new Date());
+            gtag("config", "AW-16877002370"); // معرف Google Ads
+
+            // إرسال حدث التحويل عند تحميل الصفحة
+            gtag("event", "conversion", {
+              send_to: "AW-16877002370/wHFBCPeps58aEIK9yu8-", // معرف التحويل الصحيح
+            });
+          };
+        }
+      };
+
+      // تأجيل إضافي بعد الخمول لتقليل تأثيره على FCP/LCP
+      scheduleIdle(() => setTimeout(initAds, 1500));
     }
   }, []);
 
   // تحميل الخطوط
   useEffect(() => {
-    const cairoFont = new FontFaceObserver("Cairo");
-    const amiriFont = new FontFaceObserver("Amiri");
+    const loadFonts = () => {
+      import("fontfaceobserver").then((mod) => {
+        const FontFaceObserver = mod.default || mod;
+        const cairoFont = new FontFaceObserver("Cairo");
+        const amiriFont = new FontFaceObserver("Amiri");
 
-    Promise.all([cairoFont.load(), amiriFont.load()])
-      .then(() => {
-        document.documentElement.classList.add("fonts-loaded");
-      })
-      .catch((error) => {
-        console.error("فشل تحميل الخطوط:", error);
+        Promise.all([cairoFont.load(), amiriFont.load()])
+          .then(() => {
+            document.documentElement.classList.add("fonts-loaded");
+          })
+          .catch((error) => {
+            console.error("فشل تحميل الخطوط:", error);
+          });
       });
+    };
+
+    scheduleIdle(loadFonts);
   }, []);
 
   return (

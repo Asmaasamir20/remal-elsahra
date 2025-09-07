@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import { memo } from "react";
+import PropTypes from "prop-types";
 import { clientsImage } from "./clientsImages";
 import { Link } from "react-router-dom";
 import ClientsSeo from "./ClientsSeo";
@@ -12,7 +13,8 @@ const ClientCard = memo(({ link, src, index, alt }) => (
     to={link}
     target="_blank"
     rel="noopener noreferrer"
-    className="block transform transition duration-300 w-full h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-lg hover:scale-105">
+    className="block transform transition duration-300 w-full h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-lg hover:scale-105"
+  >
     <LazyLoadImage
       src={src}
       alt={alt || `Logo of client ${index + 1}`}
@@ -25,6 +27,15 @@ const ClientCard = memo(({ link, src, index, alt }) => (
     />
   </Link>
 ));
+
+ClientCard.displayName = "ClientCard";
+
+ClientCard.propTypes = {
+  link: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  index: PropTypes.number,
+  alt: PropTypes.string,
+};
 
 const Clients = () => {
   return (

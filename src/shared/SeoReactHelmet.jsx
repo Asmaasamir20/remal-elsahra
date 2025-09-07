@@ -1,4 +1,5 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import PropTypes from "prop-types";
 
 // مكون لتحسين SEO باستخدام Helmet
 const SeoReactHelmet = ({
@@ -60,3 +61,28 @@ const SeoReactHelmet = ({
 };
 
 export default SeoReactHelmet;
+
+SeoReactHelmet.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  openGraph: PropTypes.shape({
+    type: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    url: PropTypes.string,
+    site_name: PropTypes.string,
+  }),
+  twitter: PropTypes.shape({
+    cardType: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    site: PropTypes.string,
+    creator: PropTypes.string,
+  }),
+};

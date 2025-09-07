@@ -38,13 +38,15 @@ const ServicesOverview = React.memo(() => {
                     services.length % 2 === 1 && index === services.length - 1
                       ? "lg:col-span-3 md:col-span-2"
                       : ""
-                  }`}>
+                  }`}
+                >
                   <MultilayerCardV_1>
                     <CardBody
                       title={title.title}
                       icon={cardIcons[index]}
                       id={index}
-                      className="px-4 sm:px-6 my-2 py-4 sm:py-6 font-bold relative mx-auto rounded-lg shadow-xl dark:bg-zinc-900/90 backdrop-blur-xl hover:dark:bg-zinc-100/90 hover:bg-gray-100 hover:shadow-gray-600 transition-all duration-500 ease-in-out">
+                      className="px-4 sm:px-6 my-2 py-4 sm:py-6 font-bold relative mx-auto rounded-lg shadow-xl dark:bg-zinc-900/90 backdrop-blur-xl hover:dark:bg-zinc-100/90 hover:bg-gray-100 hover:shadow-gray-600 transition-all duration-500 ease-in-out"
+                    >
                       {/* عرض الصورة إذا كانت موجودة */}
                       {title.image && (
                         <LazyLoadImage
@@ -72,5 +74,7 @@ const ServicesOverview = React.memo(() => {
     </>
   );
 });
+
+ServicesOverview.displayName = "ServicesOverview";
 
 export default ServicesOverview;

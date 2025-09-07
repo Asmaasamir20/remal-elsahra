@@ -1,21 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import legacy from "@vitejs/plugin-legacy";
 import path from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   plugins: [
     react(),
-    legacy({
-      targets: [
-        "defaults",
-        "> 0.2%",
-        "not dead",
-        "not op_mini all",
-        "not IE 11",
-      ],
-    }),
     visualizer({
       open: true, // يفتح التقرير مباشرة في المتصفح
       filename: "stats.html", // اسم ملف التقرير
@@ -29,6 +19,7 @@ export default defineConfig({
     },
   },
   build: {
+    target: "es2018", // تجنّب تحويلات غير ضرورية لمتصفحات حديثة
     outDir: "dist",
     assetsDir: "assets",
     assetsInclude: ["**/*.woff", "**/*.woff2", "**/*.ttf"],

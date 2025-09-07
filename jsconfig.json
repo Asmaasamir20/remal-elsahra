@@ -1,14 +1,15 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./jsconfig.app.json"
-    }
-  ],
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
-  }
+    },
+    "noEmit": true,
+    "checkJs": false,
+    "declaration": false,
+    "emitDeclarationOnly": false
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

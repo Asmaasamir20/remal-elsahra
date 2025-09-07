@@ -20,7 +20,8 @@ const Navbar = () => {
   return (
     <Disclosure
       as="nav"
-      className="fixed w-full top-0 bg-gray-100 shadow-sm shadow-gray-400 transition-colors duration-300 h-auto z-50">
+      className="fixed w-full top-0 bg-gray-100 shadow-sm shadow-gray-400 transition-colors duration-300 h-auto z-50"
+    >
       {({ open, close }) => (
         <>
           <div className="mx-auto lg:px-6">
@@ -53,7 +54,8 @@ const Navbar = () => {
                               : "font-extrabold"
                           } px-4 mx-2 md:mx-8 py-2 text-md transition-colors hover:text-yellow-600 hover:font-extrabold duration-200`
                         }
-                        aria-current={item.current ? "page" : undefined}>
+                        aria-current={item.current ? "page" : undefined}
+                      >
                         {item.name}
                       </NavLink>
                     ))}
@@ -63,17 +65,21 @@ const Navbar = () => {
                 <div className="hidden lg:flex items-center space-x-2  mr-6 text-gray-600 font-semibold hover:text-sky-800 transition duration-200">
                   <Link
                     to="tel:0554183175"
-                    className="text-lg flex items-center justify-center">
+                    className="text-lg flex items-center justify-center"
+                  >
                     <span className="px-2 ">0554183175</span>
                     <Phone size={26} className="text-sky-500" />
                   </Link>
                 </div>
                 <Link
                   className="flex  items-center ms-auto justify-center navbar-brand logoimg"
-                  to="/">
+                  to="/"
+                >
                   <LazyLoadImage
                     src={logoDark}
                     alt="logo"
+                    width={100}
+                    height={100}
                     className="transition-all  duration-300 "
                     effect="blur"
                   />
@@ -94,7 +100,8 @@ const Navbar = () => {
                       isActive ? "active" : ""
                     }`
                   }
-                  aria-current={item.current ? "page" : undefined}>
+                  aria-current={item.current ? "page" : undefined}
+                >
                   {item.name}
                 </NavLink>
               ))}
@@ -102,7 +109,8 @@ const Navbar = () => {
               <div className="flex items-center justify-center w-full  bg-slate-700 hover:bg-gray-800 transition-all duration-300 text-white space-x-2 mt-4 ">
                 <Link
                   to="tel:0554183175"
-                  className="font-semibold py-4 flex items-center justify-center text-lg">
+                  className="font-semibold py-4 flex items-center justify-center text-lg"
+                >
                   <span className="px-2">0554183175</span>
                   <Phone size={26} className="text-sky-500" />
                 </Link>

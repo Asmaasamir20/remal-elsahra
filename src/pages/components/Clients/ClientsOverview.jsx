@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import PropTypes from "prop-types";
 import { clientsImage } from "./clientsImages";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,7 +10,8 @@ import "react-lazy-load-image-component/src/effects/blur.css"; // تأثير ت�
 const PrevArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10">
+    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10"
+  >
     <ChevronLeft size={24} />
   </button>
 );
@@ -18,10 +20,19 @@ const PrevArrow = ({ onClick }) => (
 const NextArrow = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10">
+    className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10"
+  >
     <ChevronRight size={24} />
   </button>
 );
+
+PrevArrow.propTypes = {
+  onClick: PropTypes.func,
+};
+
+NextArrow.propTypes = {
+  onClick: PropTypes.func,
+};
 
 // تحميل react-slick بشكل lazy
 const LazySlick = React.lazy(() => import("react-slick"));
@@ -84,7 +95,8 @@ const ClientsOverview = () => {
                 to={client.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block transform transition duration-300 hover:scale-105 w-full bg-gray-100 min-w-[100px] sm:max-w-[120px] h-20 sm:h-28 mx-auto overflow-hidden rounded-lg shadow-xl">
+                className="block transform transition duration-300 hover:scale-105 w-full bg-gray-100 min-w-[100px] sm:max-w-[120px] h-20 sm:h-28 mx-auto overflow-hidden rounded-lg shadow-xl"
+              >
                 <LazyLoadImage
                   src={client.src}
                   alt={`client-logo-${index + 1}`}

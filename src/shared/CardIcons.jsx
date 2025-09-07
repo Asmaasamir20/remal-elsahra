@@ -11,13 +11,13 @@ import {
 } from "lucide-react";
 
 export const cardIcons = [
-  <ShieldAlert />, // الأمن والسلامة المهنية
-  <Building />, // التصميم المعماري
-  <Layers />, // التصميم الإنشائي
-  <ClipboardCheck />, // إدارة المشاريع
-  <Layout />, // التصميم الداخلي
-  <Cpu />, // تصميم الإلكتروميكانيك
-  <Eye />, // الإشراف الهندسي
-  <FileSignature />, // رخص البناء
-  <Ruler />, // الرفع المساحي
+  <ShieldAlert key="icon-shield-alert" />, // الأمن والسلامة المهنية
+  <Building key="icon-building" />, // التصميم المعماري
+  <Layers key="icon-layers" />, // التصميم الإنشائي
+  <ClipboardCheck key="icon-clipboard-check" />, // إدارة المشاريع
+  <Layout key="icon-layout" />, // التصميم الداخلي
+  <Cpu key="icon-cpu" />, // تصميم الإلكتروميكانيك
+  <Eye key="icon-eye" />, // الإشراف الهندسي
+  <FileSignature key="icon-file-signature" />, // رخص البناء
+  <Ruler key="icon-ruler" />, // الرفع المساحي
 ];

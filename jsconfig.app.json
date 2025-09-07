@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "composite": true,
+    "composite": false,
     "allowJs": true,
     "noEmit": true,
     "baseUrl": "./src",

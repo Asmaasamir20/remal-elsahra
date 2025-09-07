@@ -1,4 +1,4 @@
-import React from 'react'
+
 import EquipmentsOverview from './components/Equipment/EquipmentsOverview'
 
 const EquipmentPage = () => {

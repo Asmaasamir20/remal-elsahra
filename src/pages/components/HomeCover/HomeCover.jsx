@@ -1,7 +1,24 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import homeCover from "@/assets/home/homeCover.webp";
 
 const HomeCover = memo(() => {
+  // Preload LCP image without Helmet to avoid provider errors in some trees
+  useEffect(() => {
+    try {
+      const exists = document.querySelector(
+        `link[rel="preload"][as="image"][href="${homeCover}"]`
+      );
+      if (!exists) {
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.href = homeCover;
+        link.setAttribute("imagesrcset", homeCover);
+        link.setAttribute("imagesizes", "100vw");
+        document.head.appendChild(link);
+      }
+    } catch {}
+  }, []);
   return (
     <section className="home-cover relative flex items-center justify-center p-6 overflow-hidden">
       {/* LCP: صورة الغلاف كعنصر img قابل للاكتشاف مع أولوية عالية */}
@@ -9,8 +26,12 @@ const HomeCover = memo(() => {
         src={homeCover}
         alt=""
         fetchpriority="high"
+        loading="eager"
         decoding="async"
         aria-hidden="true"
+        width={1920}
+        height={1080}
+        sizes="100vw"
         className="absolute inset-0 w-full h-full object-cover"
       />
       {/* طبقة تدرّج مطابقة للتصميم السابق */}

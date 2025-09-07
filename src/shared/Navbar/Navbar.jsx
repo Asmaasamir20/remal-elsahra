@@ -76,12 +76,10 @@ const Navbar = () => {
                 >
                   <img
                     src={logoDark}
-                    srcSet={`${logoDark} 100w`}
-                    sizes="(max-width: 768px) 80px, 100px"
                     alt="logo"
                     width={100}
                     height={100}
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                     className="transition-all  duration-300 "
                   />

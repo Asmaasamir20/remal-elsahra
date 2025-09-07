@@ -3,10 +3,13 @@ import InnovationJourney from "./components/About/InnovationJourney";
 import Location from "./components/Contact/Location";
 import HomeCover from "./components/HomeCover/HomeCover";
 import HomeSeo from "./components/HomeCover/HomeSeo";
+import React, { Suspense } from "react";
 
 import ServicesOverview from "./components/Services/ServicesOverview";
-import ClientsOverview from "./components/Clients/ClientsOverview";
-
+// Lazy load ClientsOverview to defer heavy slider JS/CSS off the initial load
+const ClientsOverviewLazy = React.lazy(() =>
+  import("./components/Clients/ClientsOverview")
+);
 
 const HomePage = () => {
   return (
@@ -20,7 +23,9 @@ const HomePage = () => {
 
       <InnovationJourney />
       <Location />
-      <ClientsOverview />
+      <Suspense fallback={null}>
+        <ClientsOverviewLazy />
+      </Suspense>
     </>
   );
 };

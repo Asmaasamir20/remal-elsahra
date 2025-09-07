@@ -1,5 +1,7 @@
 import { memo, useEffect } from "react";
+// مصدر أساسي + srcset استجابي مولّد عبر imagetools
 import homeCover from "@/assets/home/homeCover.webp";
+import homeCoverSrcSet from "@/assets/home/homeCover.webp?w=480;768;1280;1920&format=webp&as=srcset&imagetools";
 
 const HomeCover = memo(() => {
   // Preload LCP image without Helmet to avoid provider errors in some trees
@@ -21,11 +23,11 @@ const HomeCover = memo(() => {
   }, []);
   return (
     <section className="home-cover relative flex items-center justify-center p-6 overflow-hidden">
-      {/* LCP: صورة الغلاف كعنصر img قابل للاكتشاف مع أولوية عالية */}
+      {/* LCP: عرض الصورة عبر <picture> مع srcset تلقائي */}
       <img
         src={homeCover}
+        srcSet={homeCoverSrcSet}
         alt=""
-        fetchpriority="high"
         loading="eager"
         decoding="async"
         aria-hidden="true"

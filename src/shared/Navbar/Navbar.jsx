@@ -2,7 +2,9 @@ import { Disclosure } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AlignRight, Phone } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+// شعار أساسي + srcset استجابي مولد كسلسلة نصية
 import logoDark from "@/assets/logo.webp";
+import logoSrcSet from "@/assets/logo.webp?w=96;150&format=webp&as=srcset&imagetools";
 // استبدال مكوّن التحميل الكسول بصورة عادية لتقليل JS ووقت الحجب
 import "./Navbar.css";
 
@@ -76,6 +78,7 @@ const Navbar = () => {
                 >
                   <img
                     src={logoDark}
+                    srcSet={logoSrcSet}
                     alt="شعار مختبر رمال الصحراء"
                     width={150}
                     height={150}
@@ -83,7 +86,6 @@ const Navbar = () => {
                     decoding="async"
                     sizes="(max-width: 640px) 96px, 150px"
                     className="transition-all duration-300 select-none"
-                    fetchPriority="low"
                   />
                 </Link>
               </div>

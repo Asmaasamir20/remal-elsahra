@@ -1,11 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { imagetools } from "vite-imagetools";
 import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   plugins: [
     react(),
+    imagetools(),
     visualizer({
       open: true, // يفتح التقرير مباشرة في المتصفح
       filename: "stats.html", // اسم ملف التقرير
@@ -17,6 +19,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+    dedupe: ["react", "react-dom", "react-router", "react-router-dom"],
   },
   build: {
     target: "es2018", // تجنّب تحويلات غير ضرورية لمتصفحات حديثة

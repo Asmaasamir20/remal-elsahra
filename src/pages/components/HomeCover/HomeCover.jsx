@@ -8,7 +8,7 @@ const HomeCover = memo(() => {
       <img
         src={homeCover}
         alt=""
-        fetchPriority="high"
+        fetchpriority="high"
         decoding="async"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"

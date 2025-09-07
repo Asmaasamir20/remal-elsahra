@@ -20,7 +20,9 @@ const HomeCover = memo(() => {
         link.setAttribute("imagesizes", "100vw");
         document.head.appendChild(link);
       }
-    } catch {}
+    } catch (err) {
+      // no-op: optional preload failed
+    }
   }, []);
   return (
     <section className="home-cover relative flex items-center justify-center p-6 overflow-hidden">

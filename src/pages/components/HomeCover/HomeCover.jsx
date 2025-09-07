@@ -1,7 +1,8 @@
 import { memo, useEffect } from "react";
-// مصدر أساسي + srcset استجابي مولّد عبر imagetools
+// LCP image: generate optimized responsive sets (AVIF+WebP) with lower quality for mobile
 import homeCover from "@/assets/home/homeCover.webp";
-import homeCoverSrcSet from "@/assets/home/homeCover.webp?w=480;768;1280;1920&format=webp&as=srcset&imagetools";
+import homeCoverAvif from "@/assets/home/homeCover.webp?w=480;768;1280;1920&format=avif&quality=60&as=srcset&imagetools";
+import homeCoverWebp from "@/assets/home/homeCover.webp?w=480;768;1280;1920&format=webp&quality=70&as=srcset&imagetools";
 
 const HomeCover = memo(() => {
   // Preload LCP image without Helmet to avoid provider errors in some trees
@@ -16,30 +17,37 @@ const HomeCover = memo(() => {
         link.as = "image";
         link.href = homeCover;
         // Ensure the browser understands responsive candidates for the preloaded image
-        link.setAttribute("imagesrcset", homeCoverSrcSet);
+        link.setAttribute("imagesrcset", `${homeCoverAvif}, ${homeCoverWebp}`);
         link.setAttribute("imagesizes", "100vw");
         document.head.appendChild(link);
       }
-    } catch (err) {
+    } catch {
       // no-op: optional preload failed
     }
   }, []);
   return (
     <section className="home-cover relative flex items-center justify-center p-6 overflow-hidden">
       {/* LCP: عرض الصورة عبر <picture> مع srcset تلقائي */}
-      <img
-        src={homeCover}
-        srcSet={homeCoverSrcSet}
-        alt=""
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        aria-hidden="true"
-        width={1920}
-        height={1080}
-        sizes="100vw"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      <picture>
+        <source type="image/avif" srcSet={homeCoverAvif} sizes="100vw" />
+        <source type="image/webp" srcSet={homeCoverWebp} sizes="100vw" />
+        <img
+          src={homeCover}
+          alt=""
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+          ref={(el) => {
+            if (el) {
+              el.setAttribute("fetchpriority", "high");
+            }
+          }}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </picture>
       {/* طبقة تدرّج مطابقة للتصميم السابق */}
       <div
         aria-hidden="true"

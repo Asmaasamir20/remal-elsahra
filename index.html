@@ -45,7 +45,21 @@
     />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- تمت إزالة preload للخطوط لتجنب تحذير "preloaded but not used"؛ يتم تحميلها عبر @font-face -->
+    <!-- Preload للخطوط الأساسية بصيغة woff2 لتسريع العرض مع font-display: swap -->
+    <link
+      rel="preload"
+      href="/src/assets/fonts/Cairo/static/Cairo-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/src/assets/fonts/Amiri/Amiri-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- ملاحظة: يتم تمهيد تحميل صورة LCP داخل React عبر عنصر img مخفي لضمان حل مسار Vite -->
   </head>

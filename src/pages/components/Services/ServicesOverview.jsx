@@ -54,6 +54,8 @@ const ServicesOverview = React.memo(() => {
                           alt={title.title}
                           className="w-full h-auto rounded-md mb-3 sm:mb-4 transition-all duration-300 ease-in-out"
                           effect="blur"
+                          loading="lazy"
+                          decoding="async"
                           width="100%"
                           height="100%"
                         />

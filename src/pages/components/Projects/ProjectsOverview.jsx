@@ -30,6 +30,7 @@ const ImageCard = React.memo(({ image, index, onClick }) => (
       alt={`Project ${index + 1}`}
       className="w-full h-96 object-cover"
       effect="blur"
+      decoding="async"
       width="100%"
       height="100%"
       loading="lazy"

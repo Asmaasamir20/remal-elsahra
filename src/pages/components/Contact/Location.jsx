@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -33,6 +33,12 @@ ContactItem.propTypes = {
 };
 
 const Location = () => {
+  const mapSrc = useMemo(
+    () =>
+      "https://maps.google.com/maps?q=%D8%B4%D8%A7%D8%B1%D8%B9%20%D8%A7%D9%84%D9%86%D8%B9%D9%85%D8%A7%D9%86%20%D8%A8%D9%86%20%D8%A8%D8%B4%D9%8A%D8%B1,%20%D8%A7%D9%84%D8%AD%D8%B2%D9%85,%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6&t=m&z=17&output=embed",
+    []
+  );
+
   return (
     <section className="py-4 bg-zinc-300">
       <div className="container max-w-7xl lg:min-w-7xl p-2 mx-auto md:px-6 lg:px-10 py-16 rounded-3xl shadow-2xl">
@@ -41,9 +47,10 @@ const Location = () => {
           <div className="h-full w-full mx-auto rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-500">
             <iframe
               className="w-full h-full rounded-lg"
-              src="https://maps.google.com/maps?q=%D8%B4%D8%A7%D8%B1%D8%B9%20%D8%A7%D9%84%D9%86%D8%B9%D9%85%D8%A7%D9%86%20%D8%A8%D9%86%20%D8%A8%D8%B4%D9%8A%D8%B1,%20%D8%A7%D9%84%D8%AD%D8%B2%D9%85,%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6&t=m&z=17&output=embed"
+              src={mapSrc}
               title="شارع النعمان بن بشير، الحزم، الرياض"
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
 

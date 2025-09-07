@@ -36,7 +36,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"], // تقسيم الكود إلى وحدات
+          vendor: ["react", "react-dom", "react-router-dom"],
+          motion: ["framer-motion"],
+          icons: ["lucide-react"],
+          lazyimg: ["react-lazy-load-image-component"],
         },
       },
     },

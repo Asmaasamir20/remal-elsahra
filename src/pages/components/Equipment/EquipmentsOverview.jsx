@@ -116,6 +116,7 @@ const EquipmentsOverview = () => {
               className="w-full h-96 object-cover transition-transform duration-500"
               loading="lazy" // تحميل الصور بشكل كسول
               effect="blur"
+              decoding="async"
               width="100%"
               height="100%"
             />
@@ -157,6 +158,7 @@ const EquipmentsOverview = () => {
                   className="w-full h-[90vh] object-contain rounded-lg"
                   loading="lazy" // تحميل الصور بشكل كسول
                   effect="blur"
+                  decoding="async"
                   width="100%"
                   height="100%"
                 />

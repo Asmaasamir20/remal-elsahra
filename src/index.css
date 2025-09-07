@@ -65,6 +65,7 @@ body {
   /* تمت إزالة صورة الخلفية لتجنّب التحميل المزدوج ولجعل LCP قابلاً للاكتشاف كعنصر img */
   /* يحافظ على نفس الارتفاع البصري للقسم */
   min-height: calc(100vh - 95px);
+  content-visibility: auto; /* يحسّن الرسم خارج الشاشة */
 }
 
 /* تمت إزالة background-attachment: fixed لتقليل تكلفة الطلاء وإعادة التدفق */
@@ -79,6 +80,7 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  content-visibility: auto;
 }
 
 .image-footer img {
@@ -98,6 +100,7 @@ body {
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
+  content-visibility: auto;
 }
 .home-cover h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);

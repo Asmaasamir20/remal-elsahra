@@ -1,7 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./components/Routing/Routes";
 import { Suspense, lazy, useEffect } from "react";
-import { RingLoader } from "react-spinners";
 
 import "./App.css";
 
@@ -107,23 +106,7 @@ function App() {
 
   // تحميل الخطوط
   useEffect(() => {
-    const loadFonts = () => {
-      import("fontfaceobserver").then((mod) => {
-        const FontFaceObserver = mod.default || mod;
-        const cairoFont = new FontFaceObserver("Cairo");
-        const amiriFont = new FontFaceObserver("Amiri");
-
-        Promise.all([cairoFont.load(), amiriFont.load()])
-          .then(() => {
-            document.documentElement.classList.add("fonts-loaded");
-          })
-          .catch((error) => {
-            console.error("فشل تحميل الخطوط:", error);
-          });
-      });
-    };
-
-    scheduleIdle(loadFonts);
+    // لم نعد نستخدم FontFaceObserver لتقليل JS؛ نعتمد على font-display: swap
   }, []);
 
   return (
@@ -131,7 +114,7 @@ function App() {
       fallback={
         <div className="loading-screen">
           <div className="spinner-container">
-            <RingLoader color="#3498db" size={80} />
+            <div className="spinner" aria-label="Loading" />
             <p className="loading-text">جاري التحميل... يرجى الانتظار</p>
           </div>
         </div>

@@ -71,17 +71,19 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <Link
-                  className="flex  items-center ms-auto justify-center navbar-brand logoimg"
+                  className="flex items-center ms-auto justify-center navbar-brand logoimg"
                   to="/"
                 >
                   <img
                     src={logoDark}
-                    alt="logo"
-                    width={100}
-                    height={100}
+                    alt="شعار مختبر رمال الصحراء"
+                    width={150}
+                    height={150}
                     loading="lazy"
                     decoding="async"
-                    className="transition-all  duration-300 "
+                    sizes="(max-width: 640px) 96px, 150px"
+                    className="transition-all duration-300 select-none"
+                    fetchPriority="low"
                   />
                 </Link>
               </div>

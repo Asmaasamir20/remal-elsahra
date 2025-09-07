@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: "Cairo";
+  src: url("./assets/fonts/Cairo/static/Cairo-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Cairo/static/Cairo-Regular.woff") format("woff"),
+    url("./assets/fonts/Cairo/static/Cairo-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+}
+
+@font-face {
+  font-family: "Amiri";
+  src: url("./assets/fonts/Amiri/Amiri-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Amiri/Amiri-Regular.woff") format("woff"),
+    url("./assets/fonts/Amiri/Amiri-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+}
+
+
+/* تنسيق القوائم */
+ul.service-list {
+  list-style-type: disc;
+  padding-right: 0.5rem;
+}
+
+ul.service-list li {
+  font-size: 16px;
+  line-height: 1.5rem;
+  color: #333;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  /* height: 3000px; */
+  padding-top: 100px;
+}
+/* global colors and fonts */
+.text-primary {
+  color: #854d0e;
+}
+.Amiri-font {
+  font-family: "Amiri", serif;
+}
+.Cairo-font {
+  font-family: "Cairo", sans-serif;
+}
+.text-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-xl {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1), 1px 1px 0 rgba(0, 0, 0, 0.15),
+    2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+.shadow-3d {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2), 2px 2px 0 rgba(0, 0, 0, 0.15),
+    3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.home-cover {
+  background: linear-gradient(135deg, rgba(38, 49, 64, 0.7), rgba(0, 0, 0, 0.8)),
+    url("./assets/home/homeCover.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  filter: brightness(0.9); 
+  min-height: calc(100vh - 95px); 
+}
+
+@media (min-width: 768px) {
+  .home-cover {
+    background-attachment: fixed; /* تطبيق الثبات فقط على الشاشات الكبيرة */
+  }
+}
+
+.footer {
+  background: linear-gradient(
+      135deg,
+      rgba(0, 23, 60, 0.1),
+      rgba(3, 13, 30, 0.2)
+    ),
+    url("./assets/bg.webp");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.image-footer img{
+  width: 200px;
+  height: 200px;
+
+  object-fit: cover;
+  object-position: center center; 
+}
+.contact {
+  background: linear-gradient(
+      135deg,
+      rgba(0, 23, 60, 0.6),
+      rgba(3, 13, 30, 0.8)
+    ),
+    url("./assets/contact/contactUs.webp");
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.home-cover h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* تأثير التدرج */
+.home-cover h2 {
+  background: linear-gradient(to bottom right, #f1f0ea, #d0ccbc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* color: #eadcd0; */
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* about us and services cover images  */
+.home-about h3,
+.home-services h2,
+.about-history h3,
+.home-products p {
+  background: linear-gradient(to bottom right, #ca8a04, #b37c05);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1), 1px 1px 0 rgba(0, 0, 0, 0.15),
+    1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.home-services h4 {
+  font-family: "Amiri", serif;
+}
+
+.rounded-5 {
+  border-radius: 5px;
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .home-cover p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .home-cover p {
+    font-size: 18px;
+  }
+}

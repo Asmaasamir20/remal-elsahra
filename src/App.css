@@ -1,0 +1,64 @@
+/* تصميم شاشة التحميل */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6); /* خلفية داكنة مع الشفافية */
+  z-index: 9999;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.spinner-container {
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 20px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  animation: textFadeIn 2s ease-in-out;
+}
+
+/* تأثير fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* تأثير النص عند التحميل */
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* تحسين الرسوم المتحركة الخاصة بـ RingLoader */
+.react-spinners-RingLoader {
+  animation: ring-spin 1s infinite linear;
+}
+
+@keyframes ring-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

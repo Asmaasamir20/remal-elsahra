@@ -1,0 +1,51 @@
+/* الأنماط العامة */
+.active,
+.show {
+  color: #ca8a04;
+  border: 1.5px solid #ca8a04;
+  border-radius: 5px;
+  font-weight: 900;
+  transition: color 0.1s ease, border-color 0.1s ease; /* تقليل التأثيرات */
+  will-change: color, border-color; /* تحسين الأداء */
+}
+
+.active:hover,
+.show:hover {
+  color: #ba791d;
+  border: 1.5px solid #ba791d;
+  text-shadow: none; /* إزالة الظلال لتحسين الأداء */
+  transition: color 0.3s ease, border-color 0.3s ease; /* التأثيرات على الخصائص المحددة فقط */
+}
+
+/* الأنماط الخاصة بالأزرار */
+.activeScroll,
+.activeScroll:hover {
+  border: #000 solid 1px;
+}
+
+/* الروابط */
+.navlink {
+  transition: color 0.3s ease, border-color 0.3s ease; /* التأثيرات فقط على اللون والحدود */
+}
+
+.navlink:hover {
+  color: #ba791d;
+  border-color: #ba791d;
+}
+
+/* صورة الشعار */
+.logoimg {
+  width: 150px;
+}
+
+.logoimg img {
+  width:100%; 
+  height: 100px;
+  object-fit: cover;
+  object-position: center center; 
+}
+
+/* العلامة التجارية */
+.navbar-brand {
+  transition: all 0.3s ease;
+}

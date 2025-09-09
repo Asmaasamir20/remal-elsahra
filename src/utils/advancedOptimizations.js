@@ -34,8 +34,8 @@ export const optimizeImageCompression = () => {
     const images = document.querySelectorAll("img");
     images.forEach((img) => {
       // إضافة تحسينات إضافية
-      if (!img.hasAttribute("fetchpriority") && img.src.includes("homeCover")) {
-        img.setAttribute("fetchpriority", "high");
+      if (!img.hasAttribute("loading") && img.src.includes("homeCover")) {
+        img.setAttribute("loading", "eager");
       }
 
       // تحسين lazy loading

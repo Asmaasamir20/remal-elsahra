@@ -43,7 +43,7 @@ export const createOptimizedImage = (
   img.decoding = "async";
 
   if (priority) {
-    img.setAttribute("fetchpriority", "high");
+    img.setAttribute("loading", "eager");
   }
 
   // إضافة تحسينات الأداء
@@ -79,7 +79,7 @@ export const preloadCriticalImages = () => {
     link.type = type;
 
     if (priority) {
-      link.setAttribute("fetchpriority", "high");
+      link.setAttribute("loading", "eager");
     }
 
     document.head.appendChild(link);

@@ -1,8 +1,20 @@
 import { memo } from "react";
+import homeCoverImage from "@/assets/home/homeCover.webp";
 
 const HomeCover = memo(() => {
   return (
     <section className="home-cover relative flex items-center justify-center overflow-hidden rounded-xl">
+      {/* صورة الخلفية المحسّنة للأداء مع fetchpriority=high */}
+      <img
+        src={homeCoverImage}
+        alt="مختبر رمال الصحراء - خلفية رئيسية"
+        className="absolute inset-0 w-full h-full object-cover"
+        fetchPriority="high"
+        loading="eager"
+        decoding="async"
+        style={{ contentVisibility: "auto" }}
+      />
+
       {/* طبقة تدرّج مطابقة للتصميم السابق */}
       <div
         aria-hidden="true"

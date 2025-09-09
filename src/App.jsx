@@ -1,6 +1,10 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./components/Routing/Routes";
 import { Suspense, lazy, useEffect } from "react";
+import {
+  initPerformanceOptimizations,
+  monitorPerformance,
+} from "./utils/performance";
 
 import "./App.css";
 
@@ -17,7 +21,7 @@ function App() {
     }
   };
 
-  // تفعيل Google Tag Manager
+  // تفعيل Google Tag Manager - تأجيل أطول لتقليل التأثير على FCP
   useEffect(() => {
     if (import.meta.env.PROD) {
       const initGTM = () => {
@@ -28,11 +32,18 @@ function App() {
         });
       };
 
+      // تأجيل أطول لتقليل التأثير على FCP/LCP
+      const delayedInit = () => {
+        setTimeout(() => {
+          scheduleIdle(initGTM);
+        }, 3000); // تأجيل 3 ثواني إضافية
+      };
+
       if (document.readyState === "complete") {
-        scheduleIdle(initGTM);
+        delayedInit();
       } else {
         const onLoad = () => {
-          scheduleIdle(initGTM);
+          delayedInit();
           window.removeEventListener("load", onLoad);
         };
         window.addEventListener("load", onLoad);
@@ -40,7 +51,7 @@ function App() {
     }
   }, []);
 
-  // تفعيل Google Analytics
+  // تفعيل Google Analytics - تأجيل أطول
   useEffect(() => {
     if (import.meta.env.PROD) {
       const initGA = () => {
@@ -64,11 +75,14 @@ function App() {
         });
       };
 
-      scheduleIdle(initGA);
+      // تأجيل أطول لتقليل التأثير على FCP/LCP
+      setTimeout(() => {
+        scheduleIdle(initGA);
+      }, 2000);
     }
   }, []);
 
-  // تفعيل Google Ads Conversion Tracking
+  // تفعيل Google Ads Conversion Tracking - تأجيل أطول
   useEffect(() => {
     if (import.meta.env.PROD) {
       const initAds = () => {
@@ -99,14 +113,26 @@ function App() {
         }
       };
 
-      // تأجيل إضافي بعد الخمول لتقليل تأثيره على FCP/LCP
-      scheduleIdle(() => setTimeout(initAds, 1500));
+      // تأجيل أطول لتقليل التأثير على FCP/LCP
+      setTimeout(() => {
+        scheduleIdle(() => setTimeout(initAds, 2000));
+      }, 4000);
     }
   }, []);
 
   // تحميل الخطوط
   useEffect(() => {
     // لم نعد نستخدم FontFaceObserver لتقليل JS؛ نعتمد على font-display: swap
+  }, []);
+
+  // تهيئة تحسينات الأداء
+  useEffect(() => {
+    initPerformanceOptimizations();
+
+    // مراقبة الأداء في بيئة التطوير فقط
+    if (import.meta.env.DEV) {
+      monitorPerformance();
+    }
   }, []);
 
   return (

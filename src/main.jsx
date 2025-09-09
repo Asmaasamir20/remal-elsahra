@@ -8,9 +8,35 @@ import homeCoverUrl from "@/assets/home/homeCover.webp";
 import homeCoverAvif from "@/assets/home/homeCover.webp?w=768;1280;1920&format=avif&quality=60&as=srcset&imagetools";
 import homeCoverWebp from "@/assets/home/homeCover.webp?w=768;1280;1920&format=webp&quality=70&as=srcset&imagetools";
 
+// إضافة preconnect hints للموارد الخارجية
+const addPreconnectHints = () => {
+  const preconnects = [
+    { href: "https://www.googletagmanager.com", crossorigin: true },
+    { href: "https://www.google-analytics.com", crossorigin: true },
+    { href: "https://fonts.googleapis.com", crossorigin: true },
+    { href: "https://fonts.gstatic.com", crossorigin: true },
+  ];
+
+  preconnects.forEach(({ href, crossorigin }) => {
+    const existing = document.querySelector(
+      `link[rel="preconnect"][href="${href}"]`
+    );
+    if (!existing) {
+      const link = document.createElement("link");
+      link.rel = "preconnect";
+      link.href = href;
+      if (crossorigin) link.crossOrigin = "anonymous";
+      document.head.appendChild(link);
+    }
+  });
+};
+
 // Inject preload for LCP image before React mounts
 if (import.meta.env.PROD) {
   try {
+    // إضافة preconnect hints أولاً
+    addPreconnectHints();
+
     const imageExists = document.querySelector(
       `link[rel="preload"][as="image"][href="${homeCoverUrl}"]`
     );

@@ -44,6 +44,9 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+  /* unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD; */
 }
 
 @font-face {
@@ -54,6 +57,7 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 
 /* تنسيق القوائم */
@@ -76,6 +80,10 @@ body {
   padding-bottom: 0;
   background-color: var(--background-light);
   color: var(--dark-text);
+  /* تحسينات الأداء */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* إزالة أي مساحة إضافية من أسفل الصفحة */
@@ -84,15 +92,33 @@ body {
   overflow-x: hidden;
 }
 
+/* تحسينات الأداء العامة */
+* {
+  box-sizing: border-box;
+}
+
+/* تحسين أداء الصور */
+img {
+  max-width: 100%;
+  height: auto;
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px; /* تقدير الحجم للتحسين */
+}
+
+/* تحسين أداء العناصر المتحركة */
+.scale-101,
+.premium-action-button,
+.clean-service-card {
+  will-change: transform;
+  transform: translateZ(0); /* تفعيل GPU acceleration */
+}
+
 /* التأكد من أن الفوتر لا يترك مساحة إضافية */
 footer {
   margin-bottom: 0 !important;
 }
 
-/* إزالة أي مساحة إضافية من العناصر */
-* {
-  box-sizing: border-box;
-}
+/* تم نقل box-sizing إلى قسم تحسينات الأداء العامة */
 
 /* التأكد من عدم وجود مساحة إضافية في أسفل الصفحة */
 #root {
@@ -181,20 +207,17 @@ footer > * {
 }
 
 .home-cover {
-  /* تمت إزالة صورة الخلفية لتجنّب التحميل المزدوج ولجعل LCP قابلاً للاكتشاف كعنصر img */
+  /* تمت إزالة صورة الخلفية من CSS لتجنّب التحميل المزدوج ولجعل LCP قابلاً للاكتشاف كعنصر img */
   /* يحافظ على نفس الارتفاع البصري للقسم */
   min-height: calc(100vh - 120px);
-  background-image: url("./assets/bg/bg1.webp");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
 }
 
 /* تمت إزالة background-attachment: fixed لتقليل تكلفة الطلاء وإعادة التدفق على الموبايل */
 @media (max-width: 768px) {
   .home-cover {
-    background-attachment: scroll;
+    min-height: calc(100vh - 80px); /* تقليل الارتفاع على الموبايل */
   }
 }
 
@@ -514,11 +537,4 @@ footer > * {
   @apply text-sm text-gray-600 dark:text-gray-300 leading-relaxed;
 }
 
-/* Line clamp utility for text truncation */
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  line-clamp: 3;
-}
+/* تم دمج line-clamp utilities في قسم واحد */

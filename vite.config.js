@@ -31,6 +31,12 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true, // إزالة console.log
+        drop_debugger: true, // إزالة debugger statements
+        pure_funcs: ["console.log", "console.info", "console.debug"], // إزالة console functions
+        passes: 2, // تشغيل الضغط مرتين لتحسين أفضل
+      },
+      mangle: {
+        safari10: true, // دعم Safari 10
       },
     },
     rollupOptions: {
@@ -38,8 +44,38 @@ export default defineConfig({
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
           motion: ["framer-motion"],
-          icons: ["lucide-react"],
+          icons: ["lucide-react", "@tabler/icons-react", "@heroicons/react"],
           lazyimg: ["react-lazy-load-image-component"],
+          analytics: ["react-gtm-module", "react-ga4", "react-ga"],
+          forms: ["react-hook-form", "@hookform/resolvers", "zod"],
+          ui: [
+            "@headlessui/react",
+            "@radix-ui/react-label",
+            "@radix-ui/react-slot",
+          ],
+        },
+        // تحسين أسماء الملفات لتقليل حجمها
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId
+            ? chunkInfo.facadeModuleId
+                .split("/")
+                .pop()
+                .replace(".jsx", "")
+                .replace(".js", "")
+            : "chunk";
+          return `js/[name]-[hash].js`;
+        },
+        entryFileNames: "js/[name]-[hash].js",
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split(".");
+          const ext = info[info.length - 1];
+          if (/\.(woff2?|eot|ttf|otf)$/.test(assetInfo.name)) {
+            return `fonts/[name]-[hash].${ext}`;
+          }
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(assetInfo.name)) {
+            return `images/[name]-[hash].${ext}`;
+          }
+          return `assets/[name]-[hash].${ext}`;
         },
       },
     },

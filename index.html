@@ -13,6 +13,17 @@
       name="keywords"
       content="فحص التربة, دراسات جيوتقنية, مختبر, رمال الصحراء"
     />
+
+    <!-- تحسينات الأداء -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- تحسين تحميل الموارد -->
+    <link rel="preload" href="/src/main.jsx" as="script" />
+    <link rel="modulepreload" href="/src/main.jsx" />
     <meta
       property="og:title"
       content="مُختَبَر رِمالُ الصَّحراءِ لِلتَّحَقُّق"
@@ -59,6 +70,15 @@
       as="font"
       type="font/woff2"
       crossorigin
+    />
+
+    <!-- Preload للصورة الرئيسية LCP -->
+    <link
+      rel="preload"
+      href="/assets/home/homeCover.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
     />
 
     <!-- System UI color integration -->

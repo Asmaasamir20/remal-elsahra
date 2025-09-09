@@ -1,6 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Professional Color System - نظام الألوان الاحترافي */
+:root {
+  /* Primary Colors - الألوان الأساسية */
+  --primary-gold-orange: #bf9f6d;
+  --primary-gold-orange-dark: #a88956;
+  --primary-gold-orange-light: #d8b98a;
+
+  /* Neutrals - الألوان المحايدة */
+  --background-light: #f9fafb;
+  --card-background: #f3f4f6;
+  --dark-text: #111827;
+  --gray-text: #6b7280;
+
+  /* Secondary Colors - الألوان الثانوية */
+  --petrol-blue: #1e3a8a;
+  --modern-green: #10b981;
+  --coral-red: #ef4444;
+
+  /* Accent Colors - ألوان التمييز */
+  --soft-violet: #7c3aed;
+  --sky-blue: #38bdf8;
+}
 @font-face {
   font-family: "Cairo";
   src: url("./assets/fonts/Cairo/static/Cairo-Regular.woff2") format("woff2"),
@@ -36,7 +59,89 @@ ul.service-list li {
 body {
   font-family: "Cairo", sans-serif;
   /* height: 3000px; */
-  padding-top: 100px;
+  padding-top: 80px;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+/* إزالة أي مساحة إضافية من أسفل الصفحة */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* التأكد من أن الفوتر لا يترك مساحة إضافية */
+footer {
+  margin-bottom: 0 !important;
+}
+
+/* إزالة أي مساحة إضافية من العناصر */
+* {
+  box-sizing: border-box;
+}
+
+/* التأكد من عدم وجود مساحة إضافية في أسفل الصفحة */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* إزالة المساحة الإضافية من الفوتر */
+
+/* إزالة أي مساحة إضافية من أسفل الصفحة */
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+html {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* التأكد من عدم وجود مساحة إضافية */
+#root > div {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* تحسين المسافات بين النصوص عالميًا */
+@layer base {
+  body {
+    line-height: 1.8;
+  }
+  p {
+    margin-bottom: 0.75rem;
+    line-height: 1.9;
+  }
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+}
+
+/* التأكد من أن الفوتر في أسفل الصفحة بدون مساحة */
+footer {
+  position: relative;
+  bottom: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* إزالة أي مساحة من العناصر الأخيرة */
+footer > * {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 /* global colors and fonts */
 .text-primary {
@@ -64,10 +169,20 @@ body {
 .home-cover {
   /* تمت إزالة صورة الخلفية لتجنّب التحميل المزدوج ولجعل LCP قابلاً للاكتشاف كعنصر img */
   /* يحافظ على نفس الارتفاع البصري للقسم */
-  min-height: calc(100vh - 95px);
+  min-height: calc(100vh - 120px);
+  background-image: url("./assets/bg/bg1.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-/* تمت إزالة background-attachment: fixed لتقليل تكلفة الطلاء وإعادة التدفق */
+/* تمت إزالة background-attachment: fixed لتقليل تكلفة الطلاء وإعادة التدفق على الموبايل */
+@media (max-width: 768px) {
+  .home-cover {
+    background-attachment: scroll;
+  }
+}
 
 .footer {
   /* يتم حقن الخلفية عند ظهور الفوتر عبر صنف .bg-ready لتقليل تكلفة LCP */
@@ -164,4 +279,236 @@ body {
   .home-cover p {
     font-size: 18px;
   }
+}
+
+/* Clean Modern Service Cards Styles - أنماط كاردات نظيفة وعصرية */
+
+/* Custom scale for subtle zoom effect */
+.scale-101 {
+  transform: scale(1.01);
+}
+
+.group:hover .scale-101 {
+  transform: scale(1.01);
+}
+
+/* Clean Card Styles - أنماط الكارد النظيف */
+.clean-service-card {
+  @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden;
+}
+
+/* Metadata Section Styles - أنماط قسم المعلومات */
+.service-metadata {
+  @apply flex items-center space-x-4 mb-4 text-sm text-gray-500 dark:text-gray-400;
+}
+
+.metadata-item {
+  @apply flex items-center space-x-1;
+}
+
+/* Service Title Styles - أنماط عنوان الخدمة */
+.service-title-clean {
+  @apply text-lg sm:text-xl font-semibold mb-4 leading-tight transition-colors duration-300;
+  color: var(--dark-text);
+}
+
+.service-title-clean:hover {
+  color: var(--primary-gold-orange);
+}
+
+/* Service Description Styles - أنماط وصف الخدمة */
+.service-description-clean {
+  @apply text-sm leading-relaxed mb-6;
+  color: var(--gray-text);
+}
+
+/* Premium Action Button Styles - أنماط الزر المميز */
+.premium-action-button {
+  @apply relative inline-flex items-center w-fit;
+}
+
+.premium-button-main {
+  @apply flex-1 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out mr-2;
+  background-color: var(--primary-gold-orange);
+}
+
+.premium-button-main:hover {
+  background-color: var(--primary-gold-orange-dark);
+}
+
+.premium-button-text {
+  @apply text-center w-full uppercase tracking-wide font-medium text-sm transition-transform duration-300;
+}
+
+.premium-button-icon {
+  @apply w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out;
+  background-color: var(--primary-gold-orange);
+}
+
+.premium-button-icon:hover {
+  background-color: var(--primary-gold-orange-dark);
+}
+
+.premium-action-button:hover .premium-button-icon {
+  @apply scale-110 rotate-12;
+}
+
+/* Global Button Styles - أنماط الأزرار العامة */
+.btn-primary {
+  background-color: var(--primary-gold-orange);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-gold-orange-dark);
+}
+
+.btn-secondary {
+  background-color: var(--petrol-blue);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #1e40af;
+}
+
+.btn-success {
+  background-color: var(--modern-green);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn-error {
+  background-color: var(--coral-red);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-error:hover {
+  background-color: #dc2626;
+}
+
+/* Global Text Colors - ألوان النصوص العامة */
+.text-primary {
+  color: var(--primary-gold-orange);
+}
+
+.text-secondary {
+  color: var(--gray-text);
+}
+
+.text-dark {
+  color: var(--dark-text);
+}
+
+.text-accent {
+  color: var(--sky-blue);
+}
+
+/* Global Background Colors - ألوان الخلفيات العامة */
+.bg-primary {
+  background-color: var(--primary-gold-orange);
+}
+
+.bg-secondary {
+  background-color: var(--petrol-blue);
+}
+
+.bg-light {
+  background-color: var(--background-light);
+}
+
+.bg-card {
+  background-color: var(--card-background);
+}
+
+/* Global Border Colors - ألوان الحدود العامة */
+.border-primary {
+  border-color: var(--primary-gold-orange);
+}
+
+.border-secondary {
+  border-color: var(--petrol-blue);
+}
+
+.border-light {
+  border-color: var(--card-background);
+}
+
+/* Author Avatars Styles - أنماط صور المؤلفين */
+.author-avatars {
+  @apply flex items-center space-x-2;
+}
+
+.author-avatar {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold;
+}
+
+.avatar-blue {
+  @apply bg-gradient-to-br from-blue-400 to-blue-600;
+}
+
+.avatar-green {
+  @apply bg-gradient-to-br from-green-400 to-green-600;
+}
+
+.avatar-purple {
+  @apply bg-gradient-to-br from-purple-400 to-purple-600;
+}
+
+.avatar-pink {
+  @apply bg-gradient-to-br from-pink-400 to-pink-600;
+}
+
+.avatar-plus {
+  @apply bg-purple-500;
+}
+
+/* Line clamp utility for text truncation */
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 4;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 3;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 2;
+}
+
+/* Service list styling */
+.service-list {
+  @apply list-disc list-inside space-y-2 mt-2;
+}
+
+.service-list li {
+  @apply text-sm text-gray-600 dark:text-gray-300 leading-relaxed;
+}
+
+/* Line clamp utility for text truncation */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 3;
 }

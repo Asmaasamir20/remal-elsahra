@@ -4,7 +4,6 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { imagesProject } from "./ProjectImages.js";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import CallMe from "@/shared/CallMe";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -87,19 +86,13 @@ const ProjectsOverview = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="w-full my-8 mx-auto text-center"
       >
-        <h2 className="text-xl Amiri-font w-1/2 mx-auto bg-gray-50 text-sky-600 text-center py-6 border-r-2 border-b-2 border-sky-600 rounded-s-xl rounded-e-xl shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:text-2xl lg:text-3xl mb-5 font-bold custom-shadow">
-          صور من مشاريعنا
+        <h2 className="text-xl Amiri-font w-1/2 mx-auto bg-gradient-to-br from-white to-amber-50 rounded-xl text-center py-8 border-2 border-amber-200 shadow-lg hover:shadow-amber-200/50 hover:scale-[1.02] transition-all duration-300 sm:text-2xl lg:text-3xl mb-5 font-bold relative overflow-hidden group">
+          <span className="relative z-10 bg-gradient-to-r from-amber-600 via-amber-700 to-yellow-600 bg-clip-text text-transparent">
+            صور من مشاريعنا
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-100/30 to-yellow-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
         </h2>
       </motion.div>
-
-      <div className="container max-w-2xl mx-auto md:px-8">
-        <div className="flex Amiri-font items-center justify-center">
-          <h4 className="text-md border-b-2 border-sky-600 rounded-s-xl rounded-e-xl sm:text-lg lg:text-2xl font-semibold text-sky-600">
-            اتصل بنا:
-          </h4>
-          <CallMe />
-        </div>
-      </div>
 
       <div className="p-8 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {images.map((image, index) => (

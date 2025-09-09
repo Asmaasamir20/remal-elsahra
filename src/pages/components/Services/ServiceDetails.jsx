@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { cardDetails } from "../Services/ServicescardTitles";
 import { Button } from "@/components/Ui/button";
@@ -15,7 +15,7 @@ const ServiceDetails = () => {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
 
-  // تحسين البحث باستخدام useMemo
+  // Build an index map once to allow O(1) lookup for service by title
   const serviceIndex = useMemo(() => {
     return cardDetails.reduce((acc, curr) => {
       acc[curr.title] = curr;
@@ -27,7 +27,7 @@ const ServiceDetails = () => {
 
   const navigate = useNavigate();
 
-  // دالة للانتقال إلى صفحة الخدمات (يجب أن تُستدعَى كل رندر لتجنب تحذير hooks)
+  // Navigate to services listing
   const goToServices = useCallback(() => {
     navigate("/services");
   }, [navigate]);
@@ -35,67 +35,136 @@ const ServiceDetails = () => {
   // إذا كانت الخدمة غير موجودة
   if (!service) {
     return (
-      <div className="container max-w-3xl mx-auto my-20 p-6 text-center bg-blue-200 dark:bg-blue-800 border border-blue-400 dark:border-blue-600 rounded-lg shadow-lg transition-all duration-500">
-        <h2 className="text-2xl font-semibold text-gray-700 dark:text-white">
+      <div className="container max-w-3xl mx-auto my-20 p-6 text-center bg-blue-50 dark:bg-blue-900/40 border border-blue-200 dark:border-blue-700 rounded-2xl shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
           الخدمة غير موجودة
         </h2>
-        <p className="text-lg mt-4 text-gray-500 dark:text-gray-300">
+        <p className="text-lg mt-4 text-gray-600 dark:text-gray-300">
           يرجى التأكد من اختيار خدمة صحيحة.
         </p>
+        <div className="mt-6">
+          <Button
+            onClick={goToServices}
+            className="px-6 py-3 rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+          >
+            <ArrowRight className="ml-2" /> جميع الخدمات
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-200 p-4 sm:p-6 md:p-10">
-      <h1 className="text-3xl mb-8 sm:text-4xl lg:text-5xl sm:my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-700 to-pink-600 text-center py-4 sm:py-8 shadow-lg shadow-blue-400 dark:shadow-blue-600 transition-all duration-500 ease-in-out">
-        {service.title}
-      </h1>
-      <div className="flex Amiri-font items-center justify-center">
-        <h4 className="text-sm sm:text-md border-b-2 border-sky-600 rounded-s-xl rounded-e-xl sm:text-lg lg:text-2xl font-semibold text-sky-600">
-          اتصل بنا:
-        </h4>
-        <CallMe />
-      </div>
-      <div className="container max-w-7xl bg-gray-100 mx-auto px-4 sm:px-6 py-6 sm:py-10 rounded-xl border transition-all duration-500 transform">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {/* عرض الصورة إذا كانت موجودة */}
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+      {/* Hero */}
+      <header className="relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-14">
+          <div className="text-center">
+            <div className="px-3 sm:px-5 my-6 sm:my-8">
+              <h1 className="text-3xl Amiri-font lg:w-1/2 mx-auto leading-6 sm:leading-8 sm:text-4xl lg:text-5xl px-6 bg-card rounded-xl text-center py-8 border-2 border-primary shadow-lg hover:shadow-primary/50 hover:scale-[1.02] transition-all duration-300 mb-4 sm:mb-5 font-bold relative overflow-hidden group">
+                <span className="relative z-10 text-primary">
+                  {service.title}
+                </span>
+                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+              </h1>
+            </div>
+            <nav
+              className="mt-3 text-sm text-gray-600 dark:text-gray-300"
+              aria-label="breadcrumb"
+            >
+              <ol className="inline-flex items-center gap-2">
+                <li>
+                  <button
+                    onClick={goToServices}
+                    className="text-blue-600 hover:text-blue-700 dark:text-sky-400 dark:hover:text-sky-300 underline-offset-2 hover:underline"
+                  >
+                    الخدمات
+                  </button>
+                </li>
+                <li aria-hidden="true" className="text-gray-400">
+                  /
+                </li>
+                <li
+                  aria-current="page"
+                  className="text-gray-800 dark:text-gray-200"
+                >
+                  {service.title}
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Content */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {/* Image */}
           {service.image && (
-            <div className="col-span-1 rounded-xl shadow-md shadow-blue-500 w-full h-full sm:w-full sm:h-full md:w-full md:h-[450px] lg:w-full lg:h-[450px] flex justify-center items-center">
-              <div className="col-span-1 rounded-xl shadow-md shadow-blue-500 w-full h-full sm:w-full sm:h-full md:w-full md:h-[450px] lg:w-full lg:h-[450px] flex justify-center items-center transform hover:scale-105 transition-all duration-500 ease-in-out">
+            <figure className="group relative rounded-2xl overflow-hidden shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 bg-white/60 dark:bg-white/5">
+              <div className="aspect-[4/3] md:aspect-[5/4] w-full">
                 <LazyLoadImage
                   src={service.image}
                   alt={service.title}
-                  className="rounded-xl w-full h-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   effect="blur"
                   width="100%"
                   height="100%"
                 />
               </div>
-            </div>
+            </figure>
           )}
 
-          {/* تفاصيل الخدمة */}
-          <div
-            className="col-span-1 text-base sm:text-lg lg:text-xl rounded-xl text-gray-700 dark:text-gray-200 leading-8 sm:leading-10 p-6 sm:p-10 bg-white dark:bg-blue-800 shadow-lg shadow-blue-400 transition-all duration-500 hover:scale-105 ease-in-out"
-            dangerouslySetInnerHTML={{ __html: service.details }}
-          />
+          {/* Details */}
+          <article className="rounded-2xl bg-white/80 dark:bg-slate-900/50 ring-1 ring-gray-200 dark:ring-gray-800 shadow-sm p-6 sm:p-8 text-gray-700 dark:text-gray-200 leading-8 sm:leading-9">
+            <div
+              className="prose prose-slate dark:prose-invert max-w-none text-base sm:text-lg"
+              dangerouslySetInnerHTML={{ __html: service.details }}
+            />
+
+            {/* Call to action */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+              <Button
+                onClick={goToServices}
+                className="px-6 py-3 rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors text-base sm:text-lg"
+                aria-label="عرض جميع الخدمات"
+              >
+                <ArrowRight className="ml-2" />
+                جميع الخدمات
+              </Button>
+
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <span className="Amiri-font">تواصل سريع:</span>
+                <Suspense
+                  fallback={
+                    <span className="inline-flex h-9 w-24 animate-pulse rounded-full bg-gray-200 dark:bg-gray-800" />
+                  }
+                >
+                  <CallMe />
+                </Suspense>
+              </div>
+            </div>
+          </article>
         </div>
 
-        <div className="text-center mt-8 sm:mt-10">
-          <Button
-            onClick={goToServices}
-            className="px-4 sm:px-6 py-4 sm:py-6 rounded-full bg-blue-500 text-white text-lg sm:text-xl hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-lg hover:shadow-gray-500 transition-all duration-500 transform hover:scale-105"
+        {/* Clients */}
+        <div className="mt-12">
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                {Array.from({ length: 6 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="h-16 rounded-xl bg-gray-200 dark:bg-gray-800 animate-pulse"
+                  />
+                ))}
+              </div>
+            }
           >
-            <ArrowRight className="ml-2" />
-            جميع الخدمات
-          </Button>
+            <ClientsOverview />
+          </Suspense>
         </div>
-
-        <div>
-          <ClientsOverview />
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

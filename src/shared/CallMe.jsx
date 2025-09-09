@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 const CallMe = ({
-  color = "text-sky-600 ",
+  color = "text-amber-600 ",
   hoverColor = "hover:text-sky-700",
 }) => {
   return (

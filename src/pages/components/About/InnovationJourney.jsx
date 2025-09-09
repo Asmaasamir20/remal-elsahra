@@ -49,12 +49,15 @@ const InnovationJourney = () => {
     <section className="InnovationJourney py-10">
       <div className="container max-w-7xl lg:min-w-7xl mx-auto  rounded-3xl py-10 md:px-6">
         <div className="px-6">
-          <h6 className="text-xl  bg-gray-50 Amiri-font w-full md:w-3/4 lg:w-1/2 mx-auto shadow-xl text-sky-600 rounded-s-xl rounded-e-xl text-center py-6 border-l-2 border-b-2 border-sky-600 transition-all duration-500 sm:text-2xl lg:text-3xl mb-5 font-bold hover:scale-105 hover:shadow-2xl">
-            لماذا تختار مختبر رمال الصحراء؟
+          <h6 className="text-xl Amiri-font w-full md:w-3/4 lg:w-1/2 mx-auto bg-gradient-to-br from-white to-amber-50 rounded-xl text-center py-8 border-2 border-amber-200 shadow-lg hover:shadow-amber-200/50 hover:scale-[1.02] transition-all duration-300 sm:text-2xl lg:text-3xl mb-5 font-bold relative overflow-hidden group">
+            <span className="relative z-10 bg-gradient-to-r from-amber-600 via-amber-700 to-yellow-600 bg-clip-text text-transparent">
+              لماذا تختار مختبر رمال الصحراء؟
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-100/30 to-yellow-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
           </h6>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-10 bg-gray-200 border-r-2 border-b-2 border-yellow-600 shadow-gray-500 gap-10 bg-opacity-80 px-6 py-20 rounded-3xl shadow-lg mx-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-10  gap-10 bg-opacity-80 px-6 py-20 rounded-3xl bg-gray-100 mx-6">
           {/* استخدام المكون المشترك لعرض البطاقات */}
           <InfoCard
             Icon={FaAward}

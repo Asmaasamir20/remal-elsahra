@@ -73,14 +73,17 @@ const ClientsOverview = () => {
   };
 
   return (
-    <div className="clients-overview text-center py-14 bg-gray-100 relative px-2">
-      <div className="container bg-gray-50 border-r-2 border-b-2 border-yellow-600 max-w-7xl lg:min-w-7xl p-2 mx-auto md:px-6 lg:px-10 py-16 rounded-3xl shadow-2xl">
+    <div className="clients-overview text-center py-14 bg-white relative px-2">
+      <div className="container  max-w-7xl lg:min-w-7xl px-2 py-16  mx-auto md:px-6 lg:px-10  rounded-3xl">
         <div className="px-6">
-          <h2 className="text-xl bg-white Amiri-font sm:text-xl lg:text-3xl w-full md:w-1/2 lg:w-1/2 mx-auto text-sky-600 text-center py-6 border-b-2 border-sky-600 transition-all duration-500 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 font-bold">
-            عملائنا
+          <h2 className="text-xl Amiri-font sm:text-xl lg:text-3xl w-full md:w-1/2 lg:w-1/2 mx-auto bg-gradient-to-br from-white to-amber-50 rounded-xl text-center py-8 border-2 border-amber-200 shadow-lg hover:shadow-amber-200/50 hover:scale-[1.02] transition-all duration-300 font-bold relative overflow-hidden group">
+            <span className="relative z-10 bg-gradient-to-r from-amber-600 via-amber-700 to-yellow-600 bg-clip-text text-transparent">
+              عملائنا
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-100/30 to-yellow-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
           </h2>
         </div>
-        <p className="text-md sm:text-lg lg:w-2/3 mx-auto leading-8 text-md font-normal my-6 py-2 lg:px-10 text-gray-600">
+        <p className="text-md sm:text-lg lg:w-2/3 mx-auto leading-8 text-md font-normal my-10 py-2 lg:px-10 text-gray-600">
           على مدى الأعوام الماضية، شرفنا بالتعاون مع نخبة من الشركات الرائدة،
           حيث قمنا بتنفيذ مشاريع كبرى وهامة تُجسد الثقة المتبادلة والرؤية
           المشتركة بيننا وبين شركائنا في النجاح.
@@ -88,7 +91,7 @@ const ClientsOverview = () => {
 
         {/* استخدام Suspense لتغليف Slider */}
         <Suspense fallback={<div className="spinner">Loading...</div>}>
-          <LazySlick {...settings}>
+          <LazySlick className="my-10 py-10 rounded-xl" {...settings}>
             {clientsImage.map((client, index) => (
               <Link
                 key={index}

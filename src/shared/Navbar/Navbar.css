@@ -2,19 +2,19 @@
 .active,
 .show {
   color: #ca8a04;
-  border: 1.5px solid #ca8a04;
-  border-radius: 5px;
   font-weight: 900;
-  transition: color 0.1s ease, border-color 0.1s ease; /* تقليل التأثيرات */
-  will-change: color, border-color; /* تحسين الأداء */
+  border: none; /* إزالة الإطار الافتراضي لاحترافية أعلى */
+  border-radius: 0;
+  transition: color 0.15s ease; /* انتقال أبسط */
+  will-change: color; /* تحسين الأداء */
+  position: relative;
 }
 
 .active:hover,
 .show:hover {
   color: #ba791d;
-  border: 1.5px solid #ba791d;
   text-shadow: none; /* إزالة الظلال لتحسين الأداء */
-  transition: color 0.3s ease, border-color 0.3s ease; /* التأثيرات على الخصائص المحددة فقط */
+  transition: color 0.2s ease; /* التأثيرات على الخصائص المحددة فقط */
 }
 
 /* الأنماط الخاصة بالأزرار */
@@ -26,11 +26,23 @@
 /* الروابط */
 .navlink {
   transition: color 0.3s ease, border-color 0.3s ease; /* التأثيرات فقط على اللون والحدود */
+  position: relative;
 }
 
 .navlink:hover {
   color: #ba791d;
   border-color: #ba791d;
+}
+
+/* شريط سفلي رفيع للحالة النشطة لاحترافية أعلى */
+.navlink.active::after {
+  content: "";
+  position: absolute;
+  inset-inline: 6px;
+  bottom: -6px;
+  height: 2px;
+  background-color: currentColor;
+  opacity: 0.9;
 }
 
 /* صورة الشعار */
@@ -39,13 +51,26 @@
 }
 
 .logoimg img {
-  width:100%; 
-  height: 100px;
-  object-fit: cover;
-  object-position: center center; 
+  width: 100%;
+  height: 90px; /* تكبير الشعار أكثر */
+  object-fit: contain; /* الحفاظ على نسب الشعار */
+  object-position: center right; /* تثبيت الشعار لليمين بصرياً */
+}
+
+/* لون روابط النافبار عندما تكون الخلفية شفافة */
+.navbar-root.bg-transparent .navlink,
+.navbar-root.bg-transparent a {
+  color: #fff;
 }
 
 /* العلامة التجارية */
 .navbar-brand {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+}
+
+/* تحسين التباعد في الروابط عند الشاشات الكبيرة */
+@media (min-width: 1024px) {
+  .navlink {
+    padding-inline: 12px;
+  }
 }

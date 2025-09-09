@@ -48,11 +48,12 @@ const ContactForm = () => {
       onSubmit={handleSubmit(sendEmail)}
       onKeyDown={(e) => {
         if (e.key === "Enter") handleSubmit(sendEmail)();
-      }}>
+      }}
+    >
       {/* اسم المستخدم */}
       <div className="form-item">
         <Input
-          className="border-2 shadow-md hover:shadow-lg placeholder:text-gray-600 text-gray-900 border-gray-200 focus:border-white focus:ring-0 p-2 rounded-xl pr-10 transition-all duration-200"
+          className="text-gray-900"
           type="text"
           placeholder="اسم المستخدم"
           endIcon={User}
@@ -68,7 +69,7 @@ const ContactForm = () => {
       {/* البريد الإلكتروني */}
       <div className="form-item">
         <Input
-          className="border-2 shadow-md hover:shadow-lg placeholder:text-gray-600 text-gray-900 border-gray-200 focus:border-white focus:ring-0 p-2 rounded-xl pr-10 transition-all duration-200"
+          className="text-gray-900"
           type="email"
           placeholder="البريد الإلكتروني"
           endIcon={Mail}
@@ -90,7 +91,7 @@ const ContactForm = () => {
       {/* رقم الهاتف */}
       <div className="form-item">
         <Input
-          className="border-2 shadow-lg hover:shadow-xl placeholder:text-gray-600 text-gray-900 border-gray-200 focus:border-white focus:ring-0 p-2 rounded-xl pr-10 transition-all duration-200 text-right"
+          className="text-gray-900 text-right"
           type="tel"
           placeholder="رقم الهاتف"
           endIcon={PhoneCall}
@@ -114,7 +115,7 @@ const ContactForm = () => {
         <textarea
           placeholder="اكتب رسالتك هنا"
           {...register("userMessage", { required: "الرسالة مطلوبة" })}
-          className="w-full h-24 rounded-xl border border-gray-300 bg-white py-3 px-4 text-md placeholder-gray-500 focus:border-blue-400 focus:ring-0 shadow-sm hover:shadow-md transition-all duration-200"
+          className="w-full h-28 rounded-xl border border-gray-300 bg-white py-3 px-4 text-md placeholder-gray-500 outline-none focus:border-[var(--primary-gold-orange)] focus:ring-2 focus:ring-[var(--primary-gold-orange)] focus:ring-offset-1 hover:border-[var(--primary-gold-orange)] shadow-sm hover:shadow-md transition-all duration-200"
         />
         {errors.userMessage && (
           <span className="text-red-500 text-sm">
@@ -126,8 +127,9 @@ const ContactForm = () => {
       <div className="relative flex justify-center">
         <Button
           type="submit"
-          className="btn w-full sm:w-1/2 md:w-1/2 lg:w-1/3 h-16 rounded-xl Amiri-font font-bold text-md sm:text-lg md:text-md lg:text-xl text-gray-50 border-sky-400 bg-sky-500 hover:bg-sky-600 hover:text-white transition-all duration-200 px-6 py-2 shadow-md shadow-black"
-          disabled={isSubmitting}>
+          className="bg-[#a98b5b] text-white font-semibold  py-7 px-8 rounded-full shadow-lg hover:bg-[#977b4f] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#cdbb9e] focus:ring-offset-2 "
+          disabled={isSubmitting}
+        >
           {isSubmitting ? "جاري الإرسال..." : "ارسال البيانات"}
           <Send />
         </Button>

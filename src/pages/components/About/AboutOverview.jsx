@@ -27,8 +27,11 @@ const AboutOverview = () => {
             className="flex flex-col justify-center"
             {...animationProps}
           >
-            <h3 className="text-xl Amiri-font leading-8 sm:text-xl md:text-2xl lg:text-3xl px-4 bg-white rounded-s-xl rounded-e-xl text-sky-600 text-center py-6 border-r-2 border-b-2 border-sky-600 shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-500 mb-5 font-bold">
-              مرحبا بكم في مختبر رمال الصحراء
+            <h3 className="text-xl Amiri-font leading-8 sm:text-xl md:text-2xl lg:text-3xl px-6 bg-gradient-to-br from-white to-amber-50 rounded-xl text-center py-8 border-2 border-amber-200 shadow-lg hover:shadow-amber-200/50 hover:scale-[1.02] transition-all duration-300 mb-5 font-bold relative overflow-hidden group">
+              <span className="relative z-10 bg-gradient-to-r from-amber-600 via-amber-700 to-yellow-600 bg-clip-text text-transparent">
+                مرحبا بكم في مختبر رمال الصحراء
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-100/30 to-yellow-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </h3>
 
             <p className="my-5 flex items-center text-xl px-4 py-4 leading-8 bg-zinc-100 border-l-2 border-yellow-500 text-gray-700">

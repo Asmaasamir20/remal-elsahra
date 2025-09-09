@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import logoimg from "@/assets/logo.webp";
-import { useEffect, useRef } from "react";
-import CallMe from "./../CallMe";
+import { useEffect, useRef, Suspense } from "react";
+import React from "react";
+const CallMe = React.lazy(() => import("./../CallMe"));
 const Footer = () => {
   const footerRef = useRef(null);
 
@@ -51,7 +52,16 @@ const Footer = () => {
                 اِتَّصِلْ بِنَا عَلَى
               </h5>
               <div className="my-5">
-                <CallMe color="text-sky-800 " hoverColor="hover:text-sky-700" />
+                <Suspense
+                  fallback={
+                    <span className="inline-block h-9 w-28 rounded-full bg-gray-200 animate-pulse" />
+                  }
+                >
+                  <CallMe
+                    color="text-sky-800 "
+                    hoverColor="hover:text-sky-700"
+                  />
+                </Suspense>
               </div>
             </div>
           </div>

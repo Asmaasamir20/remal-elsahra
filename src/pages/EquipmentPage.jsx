@@ -1,6 +1,6 @@
 import EquipmentsOverview from "./components/Equipment/EquipmentsOverview";
 import HeroSection from "@/components/Ui/HeroSection";
-import contactUsImage from "@/assets/Equipment/Image_fx.jpg";
+import contactUsImage from "@/assets/Equipment/Image_fx.webp";
 
 const EquipmentPage = () => {
   return (

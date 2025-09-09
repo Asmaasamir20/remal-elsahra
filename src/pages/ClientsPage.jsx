@@ -1,7 +1,7 @@
 
 import Clients from './components/Clients/clients';
 import HeroSection from "@/components/Ui/HeroSection";
-import contactUsImage from "@/assets/al3ml2/bg.jpg";
+import contactUsImage from "@/assets/al3ml2/bg.webp";
 
 
 const ClientsPage = () => {

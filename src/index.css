@@ -184,7 +184,7 @@ footer > * {
   /* تمت إزالة صورة الخلفية لتجنّب التحميل المزدوج ولجعل LCP قابلاً للاكتشاف كعنصر img */
   /* يحافظ على نفس الارتفاع البصري للقسم */
   min-height: calc(100vh - 120px);
-  background-image: url("./assets/bg/bg1.jpg");
+  background-image: url("./assets/bg/bg1.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 import ServiceSeo from "./components/Services/ServiceSeo";
 import ServicesOverview from "./components/Services/ServicesOverview";
 import HeroSection from "@/components/Ui/HeroSection";
-import contactUsImage from "@/assets/services/bg.jpg";
+import contactUsImage from "@/assets/services/bg.webp";
 const ServicesPage = () => {
   return (
     <>

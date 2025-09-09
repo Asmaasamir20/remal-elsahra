@@ -3,7 +3,7 @@ import ContactForm from "./components/Contact/ContactForm";
 import ContactSeo from "./components/Contact/ContactSeo";
 import Location from "./components/Contact/Location";
 import ContactDetails from "./components/Contact/ContactDetails";
-import contactUsImage from "@/assets/contact/contactUs.jpg";
+import contactUsImage from "@/assets/contact/contactUs.webp";
 
 const ContactPage = () => {
   return (

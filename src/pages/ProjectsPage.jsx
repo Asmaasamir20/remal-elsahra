@@ -1,6 +1,6 @@
 import ProjectsOverview from "./components/Projects/ProjectsOverview";
 import HeroSection from "@/components/Ui/HeroSection";
-import bgImage from "@/assets/Projects/bg.jpg";
+import bgImage from "@/assets/Projects/bg.webp";
 
 const ProjectsPage = () => {
   return (

@@ -11,7 +11,7 @@ export default defineConfig({
         if (url.searchParams.has("optimize")) {
           return new URLSearchParams({
             format: "webp",
-            quality: "75",
+            quality: "60", // تقليل الجودة من 75 إلى 60 لتوفير 139KB
             w: "1920",
             h: "1080",
           });
@@ -46,34 +46,64 @@ export default defineConfig({
         drop_console: true, // إزالة console.log
         drop_debugger: true, // إزالة debugger statements
         pure_funcs: ["console.log", "console.info", "console.debug"], // إزالة console functions
-        passes: 2, // تشغيل الضغط مرتين لتحسين أفضل
+        passes: 3, // تشغيل الضغط 3 مرات لتحسين أفضل
+        unused: true, // إزالة المتغيرات غير المستخدمة
+        dead_code: true, // إزالة الكود الميت
+        side_effects: false, // تحسين tree-shaking
       },
       mangle: {
         safari10: true, // دعم Safari 10
+        toplevel: true, // تحسين أفضل للكود
       },
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-          motion: ["framer-motion"],
-          icons: ["lucide-react", "@tabler/icons-react", "@heroicons/react"],
-          lazyimg: ["react-lazy-load-image-component"],
-          analytics: ["react-gtm-module", "react-ga4", "react-ga"],
-          forms: ["react-hook-form", "@hookform/resolvers", "zod"],
-          ui: [
-            "@headlessui/react",
-            "@radix-ui/react-label",
-            "@radix-ui/react-slot",
-          ],
+        manualChunks: (id) => {
           // تحسين code splitting للصفحات
-          pages: [
-            "./src/pages/HomePage.jsx",
-            "./src/pages/ServicesPage.jsx",
-            "./src/pages/ProjectsPage.jsx",
-            "./src/pages/EquipmentPage.jsx",
-            "./src/pages/ContactPage.jsx",
-          ],
+          if (id.includes("node_modules")) {
+            if (
+              id.includes("react") ||
+              id.includes("react-dom") ||
+              id.includes("react-router")
+            ) {
+              return "vendor";
+            }
+            if (id.includes("framer-motion")) {
+              return "motion";
+            }
+            if (
+              id.includes("lucide-react") ||
+              id.includes("@tabler/icons") ||
+              id.includes("@heroicons")
+            ) {
+              return "icons";
+            }
+            if (id.includes("react-lazy-load-image")) {
+              return "lazyimg";
+            }
+            if (id.includes("react-gtm") || id.includes("react-ga")) {
+              return "analytics";
+            }
+            if (id.includes("react-hook-form") || id.includes("zod")) {
+              return "forms";
+            }
+            if (id.includes("@headlessui") || id.includes("@radix-ui")) {
+              return "ui";
+            }
+            return "vendor";
+          }
+          // تقسيم صفحات التطبيق
+          if (id.includes("/pages/")) {
+            if (id.includes("HomePage")) return "home";
+            if (id.includes("ServicesPage")) return "services";
+            if (id.includes("ProjectsPage")) return "projects";
+            if (id.includes("EquipmentPage")) return "equipment";
+            if (id.includes("ContactPage")) return "contact";
+          }
+          // تقسيم المكونات
+          if (id.includes("/components/")) {
+            return "components";
+          }
         },
         // تحسين أسماء الملفات لتقليل حجمها
         chunkFileNames: "js/[name]-[hash].js",
@@ -99,7 +129,13 @@ export default defineConfig({
     headers: {
       "Cross-Origin-Embedder-Policy": "require-corp",
       "Cross-Origin-Opener-Policy": "same-origin",
+      // تحسين cache headers للموارد الثابتة
+      "Cache-Control": "public, max-age=31536000, immutable",
     },
+  },
+  // تحسين cache headers للموارد الثابتة
+  define: {
+    __VITE_OPTIMIZE_VERSION__: JSON.stringify(Date.now()),
   },
   esbuild: {
     // تحسين ESBuild للأداء

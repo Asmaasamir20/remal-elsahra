@@ -9,7 +9,6 @@ const HomeCover = memo(() => {
         src={homeCoverImage}
         alt="مختبر رمال الصحراء - خلفية رئيسية"
         className="absolute inset-0 w-full h-full object-cover"
-        fetchPriority="high"
         loading="eager"
         decoding="async"
         width="1920"
@@ -18,6 +17,14 @@ const HomeCover = memo(() => {
           contentVisibility: "auto",
           containIntrinsicSize: "1920px 1080px",
           willChange: "transform",
+          // تحسينات إضافية للأداء
+          imageRendering: "optimizeQuality",
+          WebkitImageRendering: "optimize-contrast",
+        }}
+        // تحسينات إضافية للتحميل
+        onLoad={() => {
+          // إضافة class عند تحميل الصورة بنجاح
+          document.body.classList.add("hero-loaded");
         }}
       />
 

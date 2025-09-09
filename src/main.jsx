@@ -37,50 +37,51 @@ if (import.meta.env.PROD) {
     // إضافة preconnect hints أولاً
     addPreconnectHints();
 
-    const imageExists = document.querySelector(
-      `link[rel="preload"][as="image"][href="${homeCoverUrl}"]`
-    );
-    if (!imageExists) {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "image";
-      link.href = homeCoverUrl;
-      link.setAttribute("fetchpriority", "high");
-      link.setAttribute("imagesrcset", `${homeCoverAvif}, ${homeCoverWebp}`);
-      link.setAttribute("imagesizes", "100vw");
-      document.head.appendChild(link);
-    }
+    // إزالة preload للصورة لأنها ستُحمل من خلال img element
+    // const imageExists = document.querySelector(
+    //   `link[rel="preload"][as="image"][href="${homeCoverUrl}"]`
+    // );
+    // if (!imageExists) {
+    //   const link = document.createElement("link");
+    //   link.rel = "preload";
+    //   link.as = "image";
+    //   link.href = homeCoverUrl;
+    //   link.setAttribute("fetchpriority", "high");
+    //   link.setAttribute("imagesrcset", `${homeCoverAvif}, ${homeCoverWebp}`);
+    //   link.setAttribute("imagesizes", "100vw");
+    //   document.head.appendChild(link);
+    // }
   } catch {
     // no-op
   }
 }
 
-// Preload fonts properly to avoid warnings
-const fonts = [
-  "/assets/fonts/Cairo/static/Cairo-Regular.woff2",
-  "/assets/fonts/Amiri/Amiri-Regular.woff2",
-];
+// Preload fonts properly to avoid warnings - تم تعطيله لأن الخطوط محملة في HTML
+// const fonts = [
+//   "/assets/fonts/Cairo/static/Cairo-Regular.woff2",
+//   "/assets/fonts/Amiri/Amiri-Regular.woff2",
+// ];
 
-if (import.meta.env.PROD) {
-  try {
-    fonts.forEach((fontUrl) => {
-      const fontExists = document.querySelector(
-        `link[rel="preload"][as="font"][href="${fontUrl}"]`
-      );
-      if (!fontExists) {
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.as = "font";
-        link.href = fontUrl;
-        link.type = "font/woff2";
-        link.crossOrigin = "anonymous";
-        document.head.appendChild(link);
-      }
-    });
-  } catch {
-    // no-op
-  }
-}
+// if (import.meta.env.PROD) {
+//   try {
+//     fonts.forEach((fontUrl) => {
+//       const fontExists = document.querySelector(
+//         `link[rel="preload"][as="font"][href="${fontUrl}"]`
+//       );
+//       if (!fontExists) {
+//         const link = document.createElement("link");
+//         link.rel = "preload";
+//         link.as = "font";
+//         link.href = fontUrl;
+//         link.type = "font/woff2";
+//         link.crossOrigin = "anonymous";
+//         document.head.appendChild(link);
+//       }
+//     });
+//   } catch {
+//     // no-op
+//   }
+// }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -84,5 +84,14 @@ export default defineConfig({
     open: true,
     port: 3000,
     hmr: true, // دعم Hot Module Replacement
+    headers: {
+      "Cross-Origin-Embedder-Policy": "require-corp",
+      "Cross-Origin-Opener-Policy": "same-origin",
+    },
+  },
+  esbuild: {
+    // تحسين ESBuild للأداء
+    target: "es2018",
+    minify: true,
   },
 });

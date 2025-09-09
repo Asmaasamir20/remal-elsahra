@@ -5,6 +5,7 @@ import {
   initPerformanceOptimizations,
   monitorPerformance,
 } from "./utils/performance";
+import { initVercelOptimizations } from "./utils/vercelOptimizations";
 
 import "./App.css";
 
@@ -128,6 +129,7 @@ function App() {
   // تهيئة تحسينات الأداء
   useEffect(() => {
     initPerformanceOptimizations();
+    initVercelOptimizations();
 
     // مراقبة الأداء في بيئة التطوير فقط
     if (import.meta.env.DEV) {

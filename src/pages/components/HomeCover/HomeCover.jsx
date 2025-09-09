@@ -1,5 +1,5 @@
 import { memo } from "react";
-import homeCoverImage from "@/assets/home/homeCover.webp";
+import homeCoverImage from "@/assets/home/homeCover.webp?optimize";
 
 const HomeCover = memo(() => {
   return (
@@ -9,12 +9,15 @@ const HomeCover = memo(() => {
         src={homeCoverImage}
         alt="مختبر رمال الصحراء - خلفية رئيسية"
         className="absolute inset-0 w-full h-full object-cover"
-        fetchpriority="high"
+        fetchPriority="high"
         loading="eager"
         decoding="async"
+        width="1920"
+        height="1080"
         style={{
           contentVisibility: "auto",
           containIntrinsicSize: "1920px 1080px",
+          willChange: "transform",
         }}
       />
 

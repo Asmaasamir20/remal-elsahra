@@ -1,13 +1,24 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
+import { fileURLToPath, URL } from "node:url";
 import { imagetools } from "vite-imagetools";
-import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   plugins: [
     react(),
-    imagetools(),
+    imagetools({
+      defaultDirectives: (url) => {
+        if (url.searchParams.has("optimize")) {
+          return new URLSearchParams({
+            format: "webp",
+            quality: "75",
+            w: "1920",
+            h: "1080",
+          });
+        }
+        return new URLSearchParams();
+      },
+    }),
     // visualizer({
     //   open: true, // يفتح التقرير مباشرة في المتصفح
     //   filename: "stats.html", // اسم ملف التقرير
@@ -17,7 +28,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
     dedupe: ["react", "react-dom", "react-router", "react-router-dom"],
   },
@@ -55,18 +66,17 @@ export default defineConfig({
             "@radix-ui/react-label",
             "@radix-ui/react-slot",
           ],
+          // تحسين code splitting للصفحات
+          pages: [
+            "./src/pages/HomePage.jsx",
+            "./src/pages/ServicesPage.jsx",
+            "./src/pages/ProjectsPage.jsx",
+            "./src/pages/EquipmentPage.jsx",
+            "./src/pages/ContactPage.jsx",
+          ],
         },
         // تحسين أسماء الملفات لتقليل حجمها
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId
-            ? chunkInfo.facadeModuleId
-                .split("/")
-                .pop()
-                .replace(".jsx", "")
-                .replace(".js", "")
-            : "chunk";
-          return `js/[name]-[hash].js`;
-        },
+        chunkFileNames: "js/[name]-[hash].js",
         entryFileNames: "js/[name]-[hash].js",
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split(".");

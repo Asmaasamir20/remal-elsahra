@@ -6,6 +6,7 @@ import {
   monitorPerformance,
 } from "./utils/performance";
 import { initVercelOptimizations } from "./utils/vercelOptimizations";
+import { initAdvancedOptimizations } from "./utils/advancedOptimizations";
 
 import "./App.css";
 
@@ -26,18 +27,24 @@ function App() {
   useEffect(() => {
     if (import.meta.env.PROD) {
       const initGTM = () => {
-        import("react-gtm-module").then((mod) => {
-          const TagManager = mod.default || mod;
-          const tagManagerArgs = { gtmId: "GTM-W9MZMH9B" };
-          TagManager.initialize(tagManagerArgs);
-        });
+        // تحميل GTM فقط عند الحاجة
+        if (
+          window.location.pathname === "/" ||
+          window.location.pathname.includes("contact")
+        ) {
+          import("react-gtm-module").then((mod) => {
+            const TagManager = mod.default || mod;
+            const tagManagerArgs = { gtmId: "GTM-W9MZMH9B" };
+            TagManager.initialize(tagManagerArgs);
+          });
+        }
       };
 
       // تأجيل أطول لتقليل التأثير على FCP/LCP
       const delayedInit = () => {
         setTimeout(() => {
           scheduleIdle(initGTM);
-        }, 3000); // تأجيل 3 ثواني إضافية
+        }, 5000); // تأجيل 5 ثواني إضافية
       };
 
       if (document.readyState === "complete") {
@@ -56,30 +63,36 @@ function App() {
   useEffect(() => {
     if (import.meta.env.PROD) {
       const initGA = () => {
-        import("react-ga4").then((mod) => {
-          const ReactGA = mod.default || mod;
-          ReactGA.initialize("G-RW5JNT36KP");
-          ReactGA.send("pageview");
+        // تحميل GA فقط عند الحاجة
+        if (
+          window.location.pathname === "/" ||
+          window.location.pathname.includes("contact")
+        ) {
+          import("react-ga4").then((mod) => {
+            const ReactGA = mod.default || mod;
+            ReactGA.initialize("G-RW5JNT36KP");
+            ReactGA.send("pageview");
 
-          const handleLocationChange = () => {
-            ReactGA.send({
-              hitType: "pageview",
-              page: window.location.pathname + window.location.search,
+            const handleLocationChange = () => {
+              ReactGA.send({
+                hitType: "pageview",
+                page: window.location.pathname + window.location.search,
+              });
+            };
+
+            window.addEventListener("popstate", handleLocationChange);
+            // تنظيف
+            window.addEventListener("beforeunload", () => {
+              window.removeEventListener("popstate", handleLocationChange);
             });
-          };
-
-          window.addEventListener("popstate", handleLocationChange);
-          // تنظيف
-          window.addEventListener("beforeunload", () => {
-            window.removeEventListener("popstate", handleLocationChange);
           });
-        });
+        }
       };
 
       // تأجيل أطول لتقليل التأثير على FCP/LCP
       setTimeout(() => {
         scheduleIdle(initGA);
-      }, 2000);
+      }, 3000);
     }
   }, []);
 
@@ -128,8 +141,19 @@ function App() {
 
   // تهيئة تحسينات الأداء
   useEffect(() => {
-    initPerformanceOptimizations();
-    initVercelOptimizations();
+    // تأجيل تحميل التحسينات لتقليل التأثير على FCP
+    const initOptimizations = () => {
+      initPerformanceOptimizations();
+      initVercelOptimizations();
+      initAdvancedOptimizations();
+    };
+
+    // تحميل التحسينات بعد تحميل الصفحة
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initOptimizations);
+    } else {
+      setTimeout(initOptimizations, 100);
+    }
 
     // مراقبة الأداء في بيئة التطوير فقط
     if (import.meta.env.DEV) {

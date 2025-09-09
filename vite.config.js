@@ -28,6 +28,8 @@ export default defineConfig({
     assetsInclude: ["**/*.woff", "**/*.woff2", "**/*.ttf"],
     sourcemap: false,
     minify: "terser", // تمكين minification
+    // تحسين تحميل الخطوط
+    assetsInlineLimit: 0, // عدم تضمين الخطوط في CSS
     terserOptions: {
       compress: {
         drop_console: true, // إزالة console.log

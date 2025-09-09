@@ -41,16 +41,16 @@ export const lazyLoadImages = () => {
  * تحميل الموارد الحرجة مسبقاً
  */
 export const preloadCriticalResources = () => {
-  const criticalImages = ["/assets/home/homeCover.webp", "/assets/logo.webp"];
-
-  criticalImages.forEach((src) => {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = src;
-    link.setAttribute("fetchpriority", "high");
-    document.head.appendChild(link);
-  });
+  // تم تعطيل preload للصور لأنها محملة في HTML
+  // const criticalImages = ["/assets/home/homeCover.webp", "/assets/logo.webp"];
+  // criticalImages.forEach((src) => {
+  //   const link = document.createElement("link");
+  //   link.rel = "preload";
+  //   link.as = "image";
+  //   link.href = src;
+  //   link.setAttribute("fetchpriority", "high");
+  //   document.head.appendChild(link);
+  // });
 };
 
 /**

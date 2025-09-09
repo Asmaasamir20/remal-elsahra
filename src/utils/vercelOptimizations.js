@@ -11,7 +11,7 @@ export const isVercel = () => {
   return (
     typeof window !== "undefined" &&
     (window.location.hostname.includes("vercel.app") ||
-      process.env.VERCEL === "1")
+      (typeof process !== "undefined" && process.env.VERCEL === "1"))
   );
 };
 
@@ -43,32 +43,32 @@ export const optimizeForVercel = () => {
  * تحميل الموارد الحرجة مسبقاً لـ Vercel
  */
 export const preloadForVercel = () => {
-  if (isVercel() && typeof window !== "undefined") {
-    // تحميل الموارد الحرجة فقط على Vercel
-    const criticalResources = [
-      {
-        href: "/assets/home/homeCover.webp",
-        as: "image",
-        type: "image/webp",
-        priority: true,
-      },
-    ];
-
-    criticalResources.forEach(({ href, as, type, priority }) => {
-      const existing = document.querySelector(
-        `link[rel="preload"][href="${href}"]`
-      );
-      if (!existing) {
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.href = href;
-        link.as = as;
-        if (type) link.type = type;
-        if (priority) link.setAttribute("fetchpriority", "high");
-        document.head.appendChild(link);
-      }
-    });
-  }
+  // تم تعطيل preload للصور لأنها محملة في HTML
+  // if (isVercel() && typeof window !== "undefined") {
+  //   // تحميل الموارد الحرجة فقط على Vercel
+  //   const criticalResources = [
+  //     {
+  //       href: "/assets/home/homeCover.webp",
+  //       as: "image",
+  //       type: "image/webp",
+  //       priority: true,
+  //     },
+  //   ];
+  //   criticalResources.forEach(({ href, as, type, priority }) => {
+  //     const existing = document.querySelector(
+  //       `link[rel="preload"][href="${href}"]`
+  //     );
+  //     if (!existing) {
+  //       const link = document.createElement("link");
+  //       link.rel = "preload";
+  //       link.href = href;
+  //       link.as = as;
+  //       if (type) link.type = type;
+  //       if (priority) link.setAttribute("fetchpriority", "high");
+  //       document.head.appendChild(link);
+  //     }
+  //   });
+  // }
 };
 
 /**

@@ -38,12 +38,10 @@
 
 @font-face {
   font-family: "Cairo";
-  src: url("./assets/fonts/Cairo/static/Cairo-Regular.woff2") format("woff2"),
-    url("./assets/fonts/Cairo/static/Cairo-Regular.woff") format("woff"),
-    url("./assets/fonts/Cairo/static/Cairo-Regular.ttf") format("truetype");
+  src: url("./assets/fonts/Cairo/static/Cairo-Regular.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
-  font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+  font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
@@ -51,12 +49,10 @@
 
 @font-face {
   font-family: "Amiri";
-  src: url("./assets/fonts/Amiri/Amiri-Regular.woff2") format("woff2"),
-    url("./assets/fonts/Amiri/Amiri-Regular.woff") format("woff"),
-    url("./assets/fonts/Amiri/Amiri-Regular.ttf") format("truetype");
+  src: url("./assets/fonts/Amiri/Amiri-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap; /* عرض النص باستخدام الخط الافتراضي في البداية */
+  font-display: swap;
   unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 
@@ -103,6 +99,13 @@ img {
   height: auto;
   content-visibility: auto;
   contain-intrinsic-size: 300px 200px; /* تقدير الحجم للتحسين */
+}
+
+/* تحسين أداء الصور الحرجة */
+.home-cover img {
+  content-visibility: auto;
+  contain-intrinsic-size: 1920px 1080px;
+  will-change: transform;
 }
 
 /* تحسين أداء العناصر المتحركة */

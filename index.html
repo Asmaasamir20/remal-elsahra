@@ -55,21 +55,58 @@
     />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- Preload للخطوط الأساسية بصيغة woff2 لتسريع العرض مع font-display: swap -->
-    <link
-      rel="preload"
-      href="/assets/fonts/Cairo/static/Cairo-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/assets/fonts/Amiri/Amiri-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <!-- تم تعطيل preload للخطوط لتجنب التحذيرات -->
+
+    <!-- Font definitions moved to CSS -->
+
+    <!-- Critical CSS inline لتقليل render blocking -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      body {
+        font-family: "Cairo", sans-serif;
+        padding-top: 80px;
+        margin: 0;
+        padding-bottom: 0;
+        background-color: #f9fafb;
+        color: #111827;
+        text-rendering: optimizeSpeed;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .home-cover {
+        min-height: calc(100vh - 120px);
+        position: relative;
+        overflow: hidden;
+      }
+      .home-cover img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .home-cover h1 {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #e5e7eb;
+        padding: 1.5rem 0;
+      }
+      .home-cover h2 {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: #e5e7eb;
+        margin-top: 1.5rem;
+      }
+      @media (max-width: 640px) {
+        .home-cover h1 {
+          font-size: 1.75rem;
+        }
+        .home-cover h2 {
+          font-size: 1rem;
+        }
+      }
+    </style>
 
     <!-- System UI color integration -->
     <meta name="color-scheme" content="light dark" />

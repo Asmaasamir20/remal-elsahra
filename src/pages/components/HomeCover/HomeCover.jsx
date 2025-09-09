@@ -9,10 +9,13 @@ const HomeCover = memo(() => {
         src={homeCoverImage}
         alt="مختبر رمال الصحراء - خلفية رئيسية"
         className="absolute inset-0 w-full h-full object-cover"
-        fetchPriority="high"
+        fetchpriority="high"
         loading="eager"
         decoding="async"
-        style={{ contentVisibility: "auto" }}
+        style={{
+          contentVisibility: "auto",
+          containIntrinsicSize: "1920px 1080px",
+        }}
       />
 
       {/* طبقة تدرّج مطابقة للتصميم السابق */}

@@ -8,12 +8,12 @@ export default defineConfig({
   plugins: [
     react(),
     imagetools(),
-    visualizer({
-      open: true, // يفتح التقرير مباشرة في المتصفح
-      filename: "stats.html", // اسم ملف التقرير
-      gzipSize: true, // يُظهر حجم الملفات بعد الضغط
-      brotliSize: true, // يُظهر حجم الملفات بعد ضغط Brotli
-    }),
+    // visualizer({
+    //   open: true, // يفتح التقرير مباشرة في المتصفح
+    //   filename: "stats.html", // اسم ملف التقرير
+    //   gzipSize: true, // يُظهر حجم الملفات بعد الضغط
+    //   brotliSize: true, // يُظهر حجم الملفات بعد ضغط Brotli
+    // }),
   ],
   resolve: {
     alias: {

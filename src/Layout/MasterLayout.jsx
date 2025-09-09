@@ -2,20 +2,25 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
 import Footer from "./../shared/Footer/Footer";
 import ScrollToTop from "./../components/Routing/ScrollToTop";
-import CallButton from "../shared/CallButton";
-import MessageButton from "../shared/MessageButton";
+import { lazy, Suspense } from "react";
+
+// Lazy-load floating action buttons to reduce initial bundle size
+const CallButton = lazy(() => import("../shared/CallButton"));
+const MessageButton = lazy(() => import("../shared/MessageButton"));
 
 const MasterLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[color:var(--background-light)] text-[color:var(--dark-text)]">
       <ScrollToTop />
       <Navbar />
-      <div className="flex-1">
+      <main className="flex-1">
         <Outlet />
-      </div>
+      </main>
       <Footer />
-      <CallButton />
-      <MessageButton />
+      <Suspense fallback={null}>
+        <CallButton />
+        <MessageButton />
+      </Suspense>
     </div>
   );
 };

@@ -24,6 +24,18 @@
   --soft-violet: #7c3aed;
   --sky-blue: #38bdf8;
 }
+
+/* Dark mode variables (class-based: .dark) */
+.dark {
+  --background-light: #0b0f19;
+  --card-background: #111827;
+  --dark-text: #e5e7eb;
+  --gray-text: #9ca3af;
+  --primary-gold-orange: #d4b07a;
+  --primary-gold-orange-dark: #c79e5e;
+  --primary-gold-orange-light: #e7c89a;
+}
+
 @font-face {
   font-family: "Cairo";
   src: url("./assets/fonts/Cairo/static/Cairo-Regular.woff2") format("woff2"),
@@ -62,6 +74,8 @@ body {
   padding-top: 80px;
   margin: 0;
   padding-bottom: 0;
+  background-color: var(--background-light);
+  color: var(--dark-text);
 }
 
 /* إزالة أي مساحة إضافية من أسفل الصفحة */
@@ -252,11 +266,9 @@ footer > * {
   h1 {
     font-size: 1.75rem;
   }
-
   h2 {
     font-size: 1.5rem;
   }
-
   .home-cover p {
     font-size: 20px;
   }
@@ -271,11 +283,9 @@ footer > * {
   h1 {
     font-size: 1rem;
   }
-
   h2 {
     font-size: 1rem;
   }
-
   .home-cover p {
     font-size: 18px;
   }

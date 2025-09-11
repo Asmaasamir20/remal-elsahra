@@ -7,6 +7,8 @@ import { ArrowRight } from "lucide-react";
 // import ClientsOverview from "./../Clients/ClientsOverview";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import SeoReactHelmet from "@/shared/SeoReactHelmet";
+import { getKeywordsForPage } from "@/seo/keywords";
 const ClientsOverview = React.lazy(() =>
   import("./../Clients/ClientsOverview")
 );
@@ -56,6 +58,89 @@ const ServiceDetails = () => {
 
   return (
     <div className="bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+      <SeoReactHelmet
+        title={`${service.title} | الخدمات | مختبر رمال الصحراء`}
+        description={`تعرف على خدمة ${service.title} المقدمة من مختبر رمال الصحراء لفحص التربة والدراسات الجيوتقنية.`}
+        keywords={getKeywordsForPage("service", [service.title])}
+        openGraph={{
+          type: "website",
+          url:
+            (typeof window !== "undefined"
+              ? window.location.href
+              : "https://www.remal-elsahra.com") || undefined,
+          title: `${service.title} | الخدمات | مختبر رمال الصحراء`,
+          description: `تفاصيل خدمة ${service.title} من مختبر رمال الصحراء`,
+          image:
+            (typeof window !== "undefined" ? window.location.origin : "") +
+            (service.image || ""),
+          site_name: "مختبر رمال الصحراء",
+        }}
+        canonical={
+          typeof window !== "undefined" ? window.location.href : undefined
+        }
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: service.title,
+            provider: {
+              "@type": "Organization",
+              name: "مختبر رمال الصحراء",
+              url: typeof window !== "undefined" ? window.location.origin : "",
+              logo: "/logo.webp",
+            },
+            areaServed: {
+              "@type": "Country",
+              name: "Saudi Arabia",
+            },
+            image:
+              (typeof window !== "undefined" ? window.location.origin : "") +
+              (service.image || ""),
+            url: typeof window !== "undefined" ? window.location.href : "",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ImageObject",
+            contentUrl:
+              (typeof window !== "undefined" ? window.location.origin : "") +
+              (service.image || ""),
+            name: service.title,
+            caption: service.title,
+            license:
+              typeof window !== "undefined" ? window.location.origin : "",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "الرئيسية",
+                item:
+                  typeof window !== "undefined"
+                    ? window.location.origin + "/"
+                    : "https://www.remal-elsahra.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "الخدمات",
+                item:
+                  typeof window !== "undefined"
+                    ? window.location.origin + "/services"
+                    : "https://www.remal-elsahra.com/services",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: service.title,
+                item: typeof window !== "undefined" ? window.location.href : "",
+              },
+            ],
+          },
+        ]}
+      />
       {/* Hero */}
       <header className="relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-14">
@@ -111,6 +196,17 @@ const ServiceDetails = () => {
                   width="100%"
                   height="100%"
                 />
+                <noscript>
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="h-full w-full object-cover"
+                    width="100%"
+                    height="100%"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </noscript>
               </div>
             </figure>
           )}

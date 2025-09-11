@@ -1,4 +1,5 @@
 import SeoReactHelmet from "@/shared/SeoReactHelmet";
+import { getKeywordsForPage } from "@/seo/keywords";
 
 const ProjectsSeo = () => {
   return (
@@ -7,25 +8,28 @@ const ProjectsSeo = () => {
       description={
         "استعرض مشاريع مختبر رمال الصحراء الرائدة في مجال فحص التربة والدراسات الجيوتقنية. اكتشف كيفية تنفيذنا لاختبارات دقيقة للخرسانة والأسفلت وضبط الجودة."
       }
-      keywords={[
-        "مشاريع مختبر رمال الصحراء",
-        "فحص التربة",
-        "الدراسات الجيوتقنية",
-        "اختبارات الخرسانة",
-        "مشاريع البناء",
-        "تحليل المواد",
-        "ضبط الجودة",
-      ]}
+      keywords={getKeywordsForPage("projects")}
       openGraph={{
         type: "website",
-        locale: "ar_AR",
-        url: "https://www.remal-elsahra.com/projects", // رابط صفحة المشاريع
+        locale: "ar_SA",
+        url:
+          (typeof window !== "undefined"
+            ? window.location.origin
+            : "https://www.remal-elsahra.com") + "/projects",
         title: "المشاريع | مختبر رمال الصحراء لفحص التربة والدراسات الجيوتقنية",
         description:
           "استعرض مشاريع مختبر رمال الصحراء المتنوعة والتي تشمل فحص التربة، الخرسانة، الأسفلت، وضبط الجودة.",
         site_name: "مختبر رمال الصحراء",
-        image: "https://www.remal-elsahra.com/projects-og-image.jpg", // صورة Open Graph
+        image:
+          (typeof window !== "undefined" ? window.location.origin : "") +
+          "/logo.webp",
+        imageAlt: "شعار مختبر رمال الصحراء",
       }}
+      canonical={
+        (typeof window !== "undefined"
+          ? window.location.origin
+          : "https://www.remal-elsahra.com") + "/projects"
+      }
       twitter={{
         cardType: "summary_large_image",
         site: "@SandDesertLab",

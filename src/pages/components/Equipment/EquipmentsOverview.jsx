@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import EquipmentSeo from "./EquipmentSeo";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import SeoReactHelmet from "@/shared/SeoReactHelmet";
 
 // reducer لتحديث حالة المودال
 const reducer = (state, action) => {
@@ -64,6 +65,16 @@ const EquipmentsOverview = () => {
   return (
     <>
       <EquipmentSeo />
+      <SeoReactHelmet
+        jsonLd={images.map((img, idx) => ({
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          contentUrl:
+            (typeof window !== "undefined" ? window.location.origin : "") + img,
+          name: `معدات مختبر رمال الصحراء - صورة ${idx + 1}`,
+          caption: "معدات مختبر رمال الصحراء",
+        }))}
+      />
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
@@ -106,7 +117,7 @@ const EquipmentsOverview = () => {
           >
             <LazyLoadImage
               src={image}
-              alt={`Project ${index + 1}`}
+              alt={`معدات مختبر رمال الصحراء - صورة ${index + 1}`}
               className="w-full h-96 object-cover transition-transform duration-500"
               loading="lazy" // تحميل الصور بشكل كسول
               effect="blur"
@@ -114,6 +125,17 @@ const EquipmentsOverview = () => {
               width="100%"
               height="100%"
             />
+            <noscript>
+              <img
+                src={image}
+                alt={`معدات مختبر رمال الصحراء - صورة ${index + 1}`}
+                className="w-full h-96 object-cover"
+                width="100%"
+                height="100%"
+                loading="eager"
+                decoding="async"
+              />
+            </noscript>
             <motion.div
               className="absolute inset-0 bg-black bg-opacity-30"
               initial={{ opacity: 0 }}

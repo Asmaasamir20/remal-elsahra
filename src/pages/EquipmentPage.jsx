@@ -1,10 +1,12 @@
 import EquipmentsOverview from "./components/Equipment/EquipmentsOverview";
 import HeroSection from "@/components/Ui/HeroSection";
 import contactUsImage from "@/assets/Equipment/Image_fx.webp";
+import EquipmentSeo from "./components/Equipment/EquipmentSeo";
 
 const EquipmentPage = () => {
   return (
     <>
+      <EquipmentSeo />
       <div className="m-4">
         {" "}
         <HeroSection

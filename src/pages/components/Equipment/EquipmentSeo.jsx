@@ -1,4 +1,5 @@
 import SeoReactHelmet from "@/shared/SeoReactHelmet";
+import { getKeywordsForPage } from "@/seo/keywords";
 
 const EquipmentSeo = () => {
   return (
@@ -7,27 +8,28 @@ const EquipmentSeo = () => {
       description={
         "اكتشف المعدات المتطورة التي يستخدمها مختبر رمال الصحراء في فحص التربة والدراسات الجيوتقنية. نحن نستخدم أحدث التكنولوجيا لضمان دقة وجودة الفحوصات."
       }
-      keywords={[
-        "المعدات",
-        "مختبر رمال الصحراء",
-        "فحص التربة",
-        "الدراسات الجيوتقنية",
-        "المعدات الحديثة",
-        "اختبارات الخرسانة",
-        "تحليل المواد",
-        "تقنيات الفحص",
-        "المعدات العلمية",
-      ]}
+      keywords={getKeywordsForPage("equipment")}
       openGraph={{
         type: "website",
-        locale: "ar_AR",
-        url: "https://www.remal-elsahra.com/equipment", // رابط صفحة المعدات
+        locale: "ar_SA",
+        url:
+          (typeof window !== "undefined"
+            ? window.location.origin
+            : "https://www.remal-elsahra.com") + "/equipment",
         title: "المعدات | مختبر رمال الصحراء لفحص التربة والدراسات الجيوتقنية",
         description:
           "تعرّف على المعدات الحديثة التي يستخدمها مختبر رمال الصحراء لضمان دقة وجودة فحوصات التربة والدراسات الجيوتقنية. نحن نستخدم أحدث التقنيات في مجال الفحص.",
         site_name: "مختبر رمال الصحراء",
-        image: "https://www.remal-elsahra.com/equipment-og-image.jpg", // صورة Open Graph
+        image:
+          (typeof window !== "undefined" ? window.location.origin : "") +
+          "/logo.webp",
+        imageAlt: "شعار مختبر رمال الصحراء",
       }}
+      canonical={
+        (typeof window !== "undefined"
+          ? window.location.origin
+          : "https://www.remal-elsahra.com") + "/equipment"
+      }
       twitter={{
         cardType: "summary_large_image",
         site: "@SandDesertLab",

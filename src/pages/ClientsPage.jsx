@@ -1,12 +1,12 @@
-
-import Clients from './components/Clients/clients';
+import Clients from "./components/Clients/clients";
 import HeroSection from "@/components/Ui/HeroSection";
 import contactUsImage from "@/assets/al3ml2/bg.webp";
-
+import ClientsSeo from "./components/Clients/ClientsSeo";
 
 const ClientsPage = () => {
   return (
     <>
+      <ClientsSeo />
       <div className="m-4">
         {" "}
         <HeroSection

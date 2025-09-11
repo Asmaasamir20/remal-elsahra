@@ -55,18 +55,17 @@ export const CardBody = ({ title, className = "", description, children }) => {
           )}
         </div>
 
-        {/* Premium Action Button - زر العمل المميز */}
+        {/* Action Button - زر الدعوة لاتخاذ إجراء */}
         <Link
           to={targetUrl}
-          className="premium-action-button group/btn  mt-6"
           onClick={(e) => e.stopPropagation()}
+          aria-label={`اكتشف المزيد عن ${title}`}
+          className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-white shadow-md ring-1 ring-primary/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 group"
         >
-          <div className="premium-button-main group-hover/btn:translate-x-1">
-            <span className="premium-button-text">اكتشف المزيد</span>
-          </div>
-          <div className="premium-button-icon group-hover/btn:scale-110 group-hover/btn:rotate-12">
-            <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 group-hover/btn:translate-y-1 transition-transform duration-300 text-white" />
-          </div>
+          <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+          <span className="text-sm sm:text-base font-semibold tracking-wide">
+            اكتشف المزيد
+          </span>
         </Link>
       </div>
     </div>

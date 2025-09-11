@@ -1,11 +1,20 @@
-import { memo } from "react";
-import homeCoverImage from "@/assets/home/homeCover.webp?optimize";
+import { memo, useEffect, useRef } from "react";
+import homeCoverImage from "@/assets/home/homeCover.webp";
 
 const HomeCover = memo(() => {
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (imageRef.current) {
+      imageRef.current.setAttribute("fetchpriority", "high");
+    }
+  }, []);
+
   return (
     <section className="home-cover relative flex items-center justify-center overflow-hidden rounded-xl">
       {/* صورة الخلفية المحسّنة للأداء مع fetchpriority=high */}
       <img
+        ref={imageRef}
         src={homeCoverImage}
         alt="مختبر رمال الصحراء - خلفية رئيسية"
         className="absolute inset-0 w-full h-full object-cover"

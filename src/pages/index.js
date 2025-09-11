@@ -3,7 +3,7 @@ import ProjectsPage from "./ProjectsPage";
 import ContactPage from "./ContactPage";
 import ServicesPage from "./ServicesPage";
 import ClientsPage from "./ClientsPage";
-import EquipmentPage from "./EquipmentPage"
+import EquipmentPage from "./EquipmentPage";
 
 export {
   HomePage,

@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block common noise
+Disallow: /private/
+Disallow: /admin/
+Disallow: /tmp/
+
+# Clean search params
+Disallow: /*?*
+
+# Sitemap
+Sitemap: https://www.remal-elsahra.com/sitemap.xml
+
+
